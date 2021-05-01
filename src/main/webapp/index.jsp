@@ -41,7 +41,7 @@
                         </div>
                         <div class="media-body">
                             <h4 class="media-heading">Free Shipping</h4>
-                            <p>You will get Free Shippinh for orders over 599.</p>
+                            <p>You will get Free Shipping for orders over 599.</p>
                         </div>
                     </div>
                 </div>

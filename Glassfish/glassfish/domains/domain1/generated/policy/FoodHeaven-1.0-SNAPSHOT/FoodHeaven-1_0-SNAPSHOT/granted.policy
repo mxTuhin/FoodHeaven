@@ -1,14 +1,16 @@
-/* AUTOMATICALLY GENERATED ON Sat May 01 13:46:46 BDT 2021*/
+/* AUTOMATICALLY GENERATED ON Sat May 01 16:23:08 BDT 2021*/
 /* DO NOT EDIT */
 
 grant {
-  permission javax.security.jacc.WebResourcePermission "/";
   permission javax.security.jacc.WebUserDataPermission "/";
+  permission javax.security.jacc.WebResourcePermission "/";
 };
 
 grant      principal * * {
   permission javax.security.jacc.WebRoleRefPermission "jsp", "**";
   permission javax.security.jacc.WebRoleRefPermission "", "**";
+  permission javax.security.jacc.WebRoleRefPermission "SignUpServlet", "**";
+  permission javax.security.jacc.WebRoleRefPermission "LogoutServlet", "**";
   permission javax.security.jacc.WebRoleRefPermission "default", "**";
   permission javax.security.jacc.WebRoleRefPermission "landingPage", "**";
   permission javax.security.jacc.WebRoleRefPermission "LoginServlet", "**";

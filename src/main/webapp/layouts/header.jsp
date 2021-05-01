@@ -18,6 +18,13 @@
             </div>
             <div class="col-md-5 clearfix">
                 <ul class="login-cart">
+
+                    <%
+                        String isLoggedIn = (String)session.getAttribute("isLoggedIn");
+                        if(isLoggedIn!="true"){
+
+
+                    %>
                     <li>
                         <a data-toggle="modal" data-target="#LoginModal" href="#">
                             <i class="fa fa-user"></i>
@@ -28,6 +35,15 @@
                         <a data-toggle="modal" data-target="#SignUpModal" href="#">
                             <i class="fa fa-user"></i>
                             SignUp
+                        </a>
+                    </li>
+                    <%
+                        }else{
+                    %>
+                    <li>
+                        <a href="LogoutServlet">
+                            <i class="fa fa-user"></i>
+                            Logout
                         </a>
                     </li>
                     <li>
@@ -49,6 +65,11 @@
                             </div>
                         </div>
                     </li>
+                    <%
+                        }
+                    %>
+
+
                 </ul>
             </div>
             <div class="col-md-2">
@@ -76,11 +97,13 @@
 
             </div>
             <div class="modal-body"><br>
-                <form action="LoginServlet" method="GET">
+                <form action="LoginServlet" method="POST">
                     <div>
+                        <label>Email</label>
                         <input placeholder="E-mail address" type="text" name="email" value="" class="form-control"><br>
                     </div>
                     <div >
+                        <label>Password</label>
                         <input placeholder="Password" type="password"name="password" value="" class="form-control"><br>
                     </div>
                     <div align="center" class="container ">
@@ -106,12 +129,22 @@
 
             </div>
             <div class="modal-body"><br>
-                <form action="LoginServlet" method="GET">
+                <form action="SignUpServlet" method="GET">
                     <div>
-                        <input placeholder="E-mail address" type="text" name="email" value="" class="form-control"><br>
+                        <label>Name</label>
+                        <input placeholder="Enter Your Name" type="text" name="name" value="" class="form-control"><br>
+                    </div>
+                    <div>
+                        <label>Cell Number</label>
+                        <input placeholder="Enter Your Cell Number" type="text" name="cellnum" value="" class="form-control"><br>
+                    </div>
+                    <div>
+                        <label>Email</label>
+                        <input placeholder="Enter Your Email" type="text" name="email" value="" class="form-control"><br>
                     </div>
                     <div >
-                        <input placeholder="Password" type="password"name="password" value="" class="form-control"><br>
+                        <label>Password</label>
+                        <input placeholder="Enter Your password" type="password" name="password" value="" class="form-control"><br>
                     </div>
                     <div align="center" class="container ">
                         <input type="submit" class="bt btn-info form-control" value="SignUp"><br>

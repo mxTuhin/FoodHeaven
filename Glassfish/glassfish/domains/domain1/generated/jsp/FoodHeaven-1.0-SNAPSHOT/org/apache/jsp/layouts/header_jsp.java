@@ -57,6 +57,15 @@ public final class header_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            </div>\r\n");
       out.write("            <div class=\"col-md-5 clearfix\">\r\n");
       out.write("                <ul class=\"login-cart\">\r\n");
+      out.write("\r\n");
+      out.write("                    ");
+
+                        String isLoggedIn = (String)session.getAttribute("isLoggedIn");
+                        if(isLoggedIn!="true"){
+
+
+                    
+      out.write("\r\n");
       out.write("                    <li>\r\n");
       out.write("                        <a data-toggle=\"modal\" data-target=\"#LoginModal\" href=\"#\">\r\n");
       out.write("                            <i class=\"fa fa-user\"></i>\r\n");
@@ -67,6 +76,17 @@ public final class header_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                        <a data-toggle=\"modal\" data-target=\"#SignUpModal\" href=\"#\">\r\n");
       out.write("                            <i class=\"fa fa-user\"></i>\r\n");
       out.write("                            SignUp\r\n");
+      out.write("                        </a>\r\n");
+      out.write("                    </li>\r\n");
+      out.write("                    ");
+
+                        }else{
+                    
+      out.write("\r\n");
+      out.write("                    <li>\r\n");
+      out.write("                        <a href=\"LogoutServlet\">\r\n");
+      out.write("                            <i class=\"fa fa-user\"></i>\r\n");
+      out.write("                            Logout\r\n");
       out.write("                        </a>\r\n");
       out.write("                    </li>\r\n");
       out.write("                    <li>\r\n");
@@ -90,6 +110,13 @@ public final class header_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                            </div>\r\n");
       out.write("                        </div>\r\n");
       out.write("                    </li>\r\n");
+      out.write("                    ");
+
+                        }
+                    
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
       out.write("                </ul>\r\n");
       out.write("            </div>\r\n");
       out.write("            <div class=\"col-md-2\">\r\n");
@@ -117,11 +144,13 @@ public final class header_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("            </div>\r\n");
       out.write("            <div class=\"modal-body\"><br>\r\n");
-      out.write("                <form action=\"LoginServlet\" method=\"GET\">\r\n");
+      out.write("                <form action=\"LoginServlet\" method=\"POST\">\r\n");
       out.write("                    <div>\r\n");
+      out.write("                        <label>Email</label>\r\n");
       out.write("                        <input placeholder=\"E-mail address\" type=\"text\" name=\"email\" value=\"\" class=\"form-control\"><br>\r\n");
       out.write("                    </div>\r\n");
       out.write("                    <div >\r\n");
+      out.write("                        <label>Password</label>\r\n");
       out.write("                        <input placeholder=\"Password\" type=\"password\"name=\"password\" value=\"\" class=\"form-control\"><br>\r\n");
       out.write("                    </div>\r\n");
       out.write("                    <div align=\"center\" class=\"container \">\r\n");
@@ -147,12 +176,22 @@ public final class header_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("            </div>\r\n");
       out.write("            <div class=\"modal-body\"><br>\r\n");
-      out.write("                <form action=\"LoginServlet\" method=\"GET\">\r\n");
+      out.write("                <form action=\"SignUpServlet\" method=\"GET\">\r\n");
       out.write("                    <div>\r\n");
-      out.write("                        <input placeholder=\"E-mail address\" type=\"text\" name=\"email\" value=\"\" class=\"form-control\"><br>\r\n");
+      out.write("                        <label>Name</label>\r\n");
+      out.write("                        <input placeholder=\"Enter Your Name\" type=\"text\" name=\"name\" value=\"\" class=\"form-control\"><br>\r\n");
+      out.write("                    </div>\r\n");
+      out.write("                    <div>\r\n");
+      out.write("                        <label>Cell Number</label>\r\n");
+      out.write("                        <input placeholder=\"Enter Your Cell Number\" type=\"text\" name=\"cellnum\" value=\"\" class=\"form-control\"><br>\r\n");
+      out.write("                    </div>\r\n");
+      out.write("                    <div>\r\n");
+      out.write("                        <label>Email</label>\r\n");
+      out.write("                        <input placeholder=\"Enter Your Email\" type=\"text\" name=\"email\" value=\"\" class=\"form-control\"><br>\r\n");
       out.write("                    </div>\r\n");
       out.write("                    <div >\r\n");
-      out.write("                        <input placeholder=\"Password\" type=\"password\"name=\"password\" value=\"\" class=\"form-control\"><br>\r\n");
+      out.write("                        <label>Password</label>\r\n");
+      out.write("                        <input placeholder=\"Enter Your password\" type=\"password\" name=\"password\" value=\"\" class=\"form-control\"><br>\r\n");
       out.write("                    </div>\r\n");
       out.write("                    <div align=\"center\" class=\"container \">\r\n");
       out.write("                        <input type=\"submit\" class=\"bt btn-info form-control\" value=\"SignUp\"><br>\r\n");

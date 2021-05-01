@@ -91,7 +91,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                        </div>\n");
       out.write("                        <div class=\"media-body\">\n");
       out.write("                            <h4 class=\"media-heading\">Free Shipping</h4>\n");
-      out.write("                            <p>You will get Free Shippinh for orders over 599.</p>\n");
+      out.write("                            <p>You will get Free Shipping for orders over 599.</p>\n");
       out.write("                        </div>\n");
       out.write("                    </div>\n");
       out.write("                </div>\n");
