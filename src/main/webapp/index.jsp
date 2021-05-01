@@ -156,7 +156,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="products-heading">
-                    <h2>Add Foods To Cart</h2>
+                    <h2>Restaurants</h2>
                 </div>
             </div>
         </div>

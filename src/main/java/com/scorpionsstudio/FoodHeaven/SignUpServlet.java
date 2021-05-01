@@ -17,7 +17,7 @@ public class SignUpServlet extends ConnectionBlock {
             ps.setString(1, request.getParameter("email"));
             rs = ps.executeQuery();
 
-            if(rs.next() == true)
+            if(rs.next() != true)
             {
                 ps = con.prepareStatement("INSERT INTO user (id, name, cellnum, email, password) VALUES(null,?, ?, ?,?)");
 

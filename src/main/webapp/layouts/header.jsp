@@ -42,13 +42,13 @@
                     %>
                     <li>
                         <a href="LogoutServlet">
-                            <i class="fa fa-user"></i>
+                            <i class="fas fa-sign-out-alt"></i>
                             Logout
                         </a>
                     </li>
                     <li>
                         <div class="cart dropdown">
-                            <a data-toggle="dropdown" href="#"><i class="fa fa-shopping-cart"></i>Cart (<span id="cardCounter">0</span>)</a>
+                            <a data-toggle="dropdown" href="#"><i class="fa fa-shopping-cart"></i>Food Bag (<span id="cardCounter">0</span> Foods)</a>
                             <div class="dropdown-menu dropup">
                                 <span class="caret"></span>
                                 <ul class="media-list">

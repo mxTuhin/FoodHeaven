@@ -7,9 +7,9 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class ConnectionBlock extends HttpServlet {
-    Connection con = dbConfig.db();
-    Statement st ;
-    ResultSet rs;
-    PreparedStatement ps;
+    public Connection con = dbConfig.db();
+    public Statement st ;
+    public ResultSet rs;
+    public PreparedStatement ps;
 
 }
