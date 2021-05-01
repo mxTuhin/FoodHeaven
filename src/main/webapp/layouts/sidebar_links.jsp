@@ -25,8 +25,7 @@
             <ul class="nav navbar-nav nav-main">
                 <li class="active"><a href="#">HOME</a></li>
                 <li><a href="products.html">SHOP</a></li>
-                <li><a href="blog.html">BLOG</a></li>
-                <li><a href="blog-single.html">ARTICLE</a></li>
+
                 <li class="dropdown">
                     <a href="#">
                         PAGES

@@ -76,12 +76,6 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    </div>\t<!-- End of /.container -->\n");
       out.write("</section> <!-- End of Section -->\n");
       out.write("\n");
-      out.write("<style>\n");
-      out.write("    .customBlock{\n");
-      out.write("        background-color: #1d87be !important;\n");
-      out.write("    }\n");
-      out.write("\n");
-      out.write("</style>\n");
       out.write("\n");
       out.write("<!-- FEATURES Start\n");
       out.write("================================================== -->\n");
@@ -97,7 +91,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                        </div>\n");
       out.write("                        <div class=\"media-body\">\n");
       out.write("                            <h4 class=\"media-heading\">Free Shipping</h4>\n");
-      out.write("                            <p>Lorem ipsum dolor sit amet, consectetur.</p>\n");
+      out.write("                            <p>You will get Free Shippinh for orders over 599.</p>\n");
       out.write("                        </div>\n");
       out.write("                    </div>\n");
       out.write("                </div>\n");
@@ -109,8 +103,8 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                            <i class=\" fab fa-foursquare\"></i>\n");
       out.write("                        </div>\n");
       out.write("                        <div class=\"media-body\">\n");
-      out.write("                            <h4 class=\"media-heading\">Media heading</h4>\n");
-      out.write("                            <p>Lorem ipsum dolor sit amet, consectetur.</p>\n");
+      out.write("                            <h4 class=\"media-heading\">Facebook Post Discount</h4>\n");
+      out.write("                            <p>You will get a 5% discount for uploading a picture on Facebook by tagging us.</p>\n");
       out.write("                        </div>\n");
       out.write("                    </div>\n");
       out.write("                </div>\n");
@@ -123,7 +117,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                        </div>\n");
       out.write("                        <div class=\"media-body\">\n");
       out.write("                            <h4 class=\"media-heading\">Call Us</h4>\n");
-      out.write("                            <p>Lorem ipsum dolor sit amet, consectetur.</p>\n");
+      out.write("                            <p>Any Problem? Never hesitate to call us.</p>\n");
       out.write("                        </div>\t<!-- End of /.media-body -->\n");
       out.write("                    </div>\t<!-- End of /.media -->\n");
       out.write("                </div>\t<!-- End of /.block -->\n");
@@ -218,7 +212,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <div class=\"row\">\n");
       out.write("            <div class=\"col-md-12\">\n");
       out.write("                <div class=\"products-heading\">\n");
-      out.write("                    <h2>NEW PRODUCTS</h2>\n");
+      out.write("                    <h2>Add Foods To Cart</h2>\n");
       out.write("                </div>\n");
       out.write("            </div>\n");
       out.write("        </div>\n");

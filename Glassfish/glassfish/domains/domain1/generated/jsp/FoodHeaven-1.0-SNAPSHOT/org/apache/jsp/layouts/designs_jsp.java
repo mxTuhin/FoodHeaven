@@ -54,6 +54,9 @@ public final class designs_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    <!-- Fonts -->\r\n");
       out.write("    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>\r\n");
       out.write("    <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,700' rel='stylesheet' type='text/css'>\r\n");
+      out.write("    <link rel=\"shortcut icon\" href=\"");
+      out.print(StaticVars.baseURL);
+      out.write("images/food.png\" />\r\n");
       out.write("\r\n");
       out.write("    <!-- Css -->\r\n");
       out.write("    <link rel=\"stylesheet\" href=\"");

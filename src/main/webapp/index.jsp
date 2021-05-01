@@ -26,12 +26,6 @@
     </div>	<!-- End of /.container -->
 </section> <!-- End of Section -->
 
-<style>
-    .customBlock{
-        background-color: #1d87be !important;
-    }
-
-</style>
 
 <!-- FEATURES Start
 ================================================== -->
@@ -47,7 +41,7 @@
                         </div>
                         <div class="media-body">
                             <h4 class="media-heading">Free Shipping</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur.</p>
+                            <p>You will get Free Shippinh for orders over 599.</p>
                         </div>
                     </div>
                 </div>
@@ -59,8 +53,8 @@
                             <i class=" fab fa-foursquare"></i>
                         </div>
                         <div class="media-body">
-                            <h4 class="media-heading">Media heading</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur.</p>
+                            <h4 class="media-heading">Facebook Post Discount</h4>
+                            <p>You will get a 5% discount for uploading a picture on Facebook by tagging us.</p>
                         </div>
                     </div>
                 </div>
@@ -73,7 +67,7 @@
                         </div>
                         <div class="media-body">
                             <h4 class="media-heading">Call Us</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur.</p>
+                            <p>Any Problem? Never hesitate to call us.</p>
                         </div>	<!-- End of /.media-body -->
                     </div>	<!-- End of /.media -->
                 </div>	<!-- End of /.block -->
@@ -162,7 +156,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="products-heading">
-                    <h2>NEW PRODUCTS</h2>
+                    <h2>Add Foods To Cart</h2>
                 </div>
             </div>
         </div>

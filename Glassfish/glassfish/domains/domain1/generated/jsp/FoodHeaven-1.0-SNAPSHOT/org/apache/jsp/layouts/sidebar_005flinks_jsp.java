@@ -64,8 +64,7 @@ public final class sidebar_005flinks_jsp extends org.apache.jasper.runtime.HttpJ
       out.write("            <ul class=\"nav navbar-nav nav-main\">\r\n");
       out.write("                <li class=\"active\"><a href=\"#\">HOME</a></li>\r\n");
       out.write("                <li><a href=\"products.html\">SHOP</a></li>\r\n");
-      out.write("                <li><a href=\"blog.html\">BLOG</a></li>\r\n");
-      out.write("                <li><a href=\"blog-single.html\">ARTICLE</a></li>\r\n");
+      out.write("\r\n");
       out.write("                <li class=\"dropdown\">\r\n");
       out.write("                    <a href=\"#\">\r\n");
       out.write("                        PAGES\r\n");

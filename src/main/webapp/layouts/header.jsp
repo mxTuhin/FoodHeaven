@@ -13,20 +13,26 @@
 <section id="top" class="customBlock">
     <div class="container ">
         <div class="row">
-            <div class="col-md-7 ">
+            <div class="col-md-5 ">
                 <p class="contact-action "><i class="fa fa-phone-square"></i>IN CASE OF ANY QUESTIONS, CALL THIS NUMBER: <strong>+880 1678710456</strong></p>
             </div>
-            <div class="col-md-3 clearfix">
+            <div class="col-md-5 clearfix">
                 <ul class="login-cart">
                     <li>
-                        <a data-toggle="modal" data-target="#myModal" href="#">
+                        <a data-toggle="modal" data-target="#LoginModal" href="#">
                             <i class="fa fa-user"></i>
                             Login
                         </a>
                     </li>
                     <li>
+                        <a data-toggle="modal" data-target="#SignUpModal" href="#">
+                            <i class="fa fa-user"></i>
+                            SignUp
+                        </a>
+                    </li>
+                    <li>
                         <div class="cart dropdown">
-                            <a data-toggle="dropdown" href="#"><i class="fa fa-shopping-cart"></i>Cart(1)</a>
+                            <a data-toggle="dropdown" href="#"><i class="fa fa-shopping-cart"></i>Cart (<span id="cardCounter">0</span>)</a>
                             <div class="dropdown-menu dropup">
                                 <span class="caret"></span>
                                 <ul class="media-list">
@@ -59,64 +65,67 @@
     </div>	<!-- End Of /.Container -->
 
 
-    <!-- MODAL Start
-        ================================================== -->
+</section>  <!-- End of /Section -->
 
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">Introduce Yourself</h4>
-                </div>
-                <div class="modal-body clearfix">
+<!-- Modal -->
+<div class="modal fade" id="LoginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="LoginModallLongTitle">Login Here</h5>
 
-                    <form action="#" method="post" id="create-account_form" class="std">
-                        <fieldset>
-                            <h3>Create your account</h3>
-                            <div class="form_content clearfix">
-                                <h4>Enter your e-mail address to create an account.</h4>
-                                <p class="text">
-                                    <label for="email_create">E-mail address</label>
-                                    <span>
-											<input placeholder="E-mail address"  type="text" id="email_create" name="email_create" value="" class="account_input">
-					                    </span>
-                                </p>
-                                <p class="submit">
-                                    <button class="btn btn-primary">Create Your Account</button>
-                                </p>
-                            </div>
-                        </fieldset>
-                    </form>
-                    <form action="LoginServlet" method="GET" id="login_form" class="std">
-                        <fieldset>
-                            <h3>Already registered?</h3>
-                            <div class="form_content clearfix">
-                                <p class="text">
-                                    <label for="email">E-mail address</label>
-                                    <span><input placeholder="E-mail address" type="text" id="email" name="email" value="" class="account_input"></span>
-                                </p>
-                                <p class="text">
-                                    <label for="passwd">Password</label>
-                                    <span><input placeholder="Password" type="password" id="passwd" name="password" value="" class="account_input"></span>
-                                </p>
-                                <p class="lost_password">
-                                    <a href="#popab-password-reset" class="popab-password-link">Forgot your password?</a>
-                                </p>
-                                <p class="submit">
-                                    <button class="btn btn-success">Log in</button>
-                                </p>
-                            </div>
-                        </fieldset>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
+            </div>
+            <div class="modal-body"><br>
+                <form action="LoginServlet" method="GET">
+                    <div>
+                        <input placeholder="E-mail address" type="text" name="email" value="" class="form-control"><br>
+                    </div>
+                    <div >
+                        <input placeholder="Password" type="password"name="password" value="" class="form-control"><br>
+                    </div>
+                    <div align="center" class="container ">
+                        <input type="submit" class="bt btn-info form-control" value="SignIn"><br>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
             </div>
         </div>
     </div>
-</section>  <!-- End of /Section -->
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="SignUpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="SignUpModalLongTitle">Sign Up Here</h5>
+
+            </div>
+            <div class="modal-body"><br>
+                <form action="LoginServlet" method="GET">
+                    <div>
+                        <input placeholder="E-mail address" type="text" name="email" value="" class="form-control"><br>
+                    </div>
+                    <div >
+                        <input placeholder="Password" type="password"name="password" value="" class="form-control"><br>
+                    </div>
+                    <div align="center" class="container ">
+                        <input type="submit" class="bt btn-info form-control" value="SignUp"><br>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
 
 
 

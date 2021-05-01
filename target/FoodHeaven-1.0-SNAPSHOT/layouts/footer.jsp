@@ -45,7 +45,7 @@
             <div class="col-md-4">
                 <div class="block">
                     <h4>GET IN TOUCH</h4>
-                    <p ><i class="fa  fa-map-marker"></i> <span>Scorpions Studio, </span>Narayanganj</p>
+                    <p ><i class="fa  fa-map-marker"></i> <span><a style="color: white" href="https://goo.gl/maps/kmoRyQDNo2UyMpnL7" target="_blank">Scorpions Studio,</a> </span>Narayanganj</p>
                     <p> <i class="fa  fa-phone"></i> <span>Phone:</span> +880 1678710456 </p>
 
                     <p class="mail"><i class="fa  fa-envelope"></i>Eamil: <span>mail@mxtuhin.ninja</span></p>
@@ -53,7 +53,7 @@
             </div> <!-- End Of Col-md-3 -->
             <div class="col-md-4">
                 <div class="block">
-                    <h4>UPCOMING ITEMS</h4>
+                    <h4>Featured</h4>
                     <div class="media">
                         <a class="pull-left" href="#">
                             <img class="media-object" src="<%=StaticVars.baseURL%>images/product-item.jpg" alt="...">
@@ -91,29 +91,15 @@
                     <ul class="cash-out pull-left">
                         <li>
                             <a href="#">
-                                <img src="<%=StaticVars.baseURL%>images/American-Express.png" alt="">
+                                <img style="height: 40px" src="<%=StaticVars.baseURL%>images/nagad.png" alt="">
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <img src="<%=StaticVars.baseURL%>images/PayPal.png" alt="">
+                                <img style="height: 40px" src="<%=StaticVars.baseURL%>images/bkash.png" alt="">
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
-                                <img src="<%=StaticVars.baseURL%>images/Maestro.png" alt="">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src="<%=StaticVars.baseURL%>images/Visa.png" alt="">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src="<%=StaticVars.baseURL%>images/Visa-Electron.png" alt="">
-                            </a>
-                        </li>
+
                     </ul>
                     <p class="copyright-text pull-right"><script type="text/javascript">
                         document.write(new Date().getFullYear());

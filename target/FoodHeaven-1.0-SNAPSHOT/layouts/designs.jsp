@@ -15,6 +15,7 @@
     <!-- Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,700' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" href="<%=StaticVars.baseURL%>images/food.png" />
 
     <!-- Css -->
     <link rel="stylesheet" href="<%=StaticVars.baseURL%>css/nivo-slider.css" type="text/css" />
