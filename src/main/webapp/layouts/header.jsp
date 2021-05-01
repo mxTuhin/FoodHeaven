@@ -10,11 +10,11 @@
 <!-- TOP HEADER Start
 ================================================== -->
 
-<section id="top">
-    <div class="container">
+<section id="top" class="customBlock">
+    <div class="container ">
         <div class="row">
-            <div class="col-md-7">
-                <p class="contact-action"><i class="fa fa-phone-square"></i>IN CASE OF ANY QUESTIONS, CALL THIS NUMBER: <strong>+880 1678710456</strong></p>
+            <div class="col-md-7 ">
+                <p class="contact-action "><i class="fa fa-phone-square"></i>IN CASE OF ANY QUESTIONS, CALL THIS NUMBER: <strong>+880 1678710456</strong></p>
             </div>
             <div class="col-md-3 clearfix">
                 <ul class="login-cart">

@@ -26,7 +26,12 @@
     </div>	<!-- End of /.container -->
 </section> <!-- End of Section -->
 
+<style>
+    .customBlock{
+        background-color: #1d87be !important;
+    }
 
+</style>
 
 <!-- FEATURES Start
 ================================================== -->
@@ -34,8 +39,8 @@
 <section id="features">
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
-                <div class="block">
+            <div  class="col-md-4">
+                <div  class="block customBlock">
                     <div class="media">
                         <div class="pull-left" href="#">
                             <i class="fa fa-ambulance"></i>
@@ -48,7 +53,7 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="block">
+                <div class="block customBlock">
                     <div class="media">
                         <div class="pull-left" href="#">
                             <i class=" fab fa-foursquare"></i>
@@ -61,7 +66,7 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="block">
+                <div class="block customBlock">
                     <div class="media">
                         <div class="pull-left" href="#">
                             <i class=" fa fa-phone"></i>

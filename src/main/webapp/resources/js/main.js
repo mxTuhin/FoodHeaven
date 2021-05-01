@@ -16,7 +16,7 @@ $(document).ready(function() {
 	});
 
 	$("html").niceScroll({
-		cursorcolor : "#90c322",
+		cursorcolor : "#1d87be",
 		cursorwidth : "10px" ,
 		zindex: 9999 ,
 		cursorborder: "none"	,
