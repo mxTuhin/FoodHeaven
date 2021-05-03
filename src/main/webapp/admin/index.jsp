@@ -1,3 +1,4 @@
+
 <%@ page import="com.scorpionsstudio.FoodHeaven.StaticVars" %><%--
   Created by IntelliJ IDEA.
   User: mtuhi
@@ -8,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Admin SignIn</title>
 </head>
 <jsp:include page="layouts/indexApp.jsp"/>
 <body>
@@ -20,21 +21,25 @@
                     <div class="card-body">
                         <img src="<%=StaticVars.baseURL%>admin/images/logo-dark.png" alt="" class="img-fluid mb-4">
                         <h4 class="mb-3 f-w-400">Login to your account</h4>
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="feather icon-mail"></i></span>
+                        <form action="${pageContext.request.contextPath}/AdminSignInServlet" method="POST">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="feather icon-mail"></i></span>
+                                </div>
+                                <input type="email" class="form-control" name="email" placeholder="Email address">
                             </div>
-                            <input type="email" class="form-control" placeholder="Email address">
-                        </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="feather icon-lock"></i></span>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="feather icon-lock"></i></span>
+                                </div>
+                                <input type="password" class="form-control" name="password" placeholder="Password">
                             </div>
-                            <input type="password" class="form-control" placeholder="Password">
-                        </div>
+                            <button type="submit" class="btn btn-primary mb-4">Login</button>
+                        </form>
 
 
-                        <button class="btn btn-primary mb-4">Login</button>
+
+
                         <h3>${requestScope.message}</h3>
                         <%--                        <p class="mb-2 text-muted">Forgot password? <a href="auth-reset-password.html" class="f-w-400">Reset</a></p>--%>
                         <p class="mb-0 text-muted">Don’t have an account? <a href="signup.jsp" class="f-w-400">Signup</a></p>

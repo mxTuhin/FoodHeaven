@@ -1,35 +1,25 @@
 package com.scorpionsstudio.FoodHeaven;
 
-
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import java.io.*;
-import java.time.format.DateTimeFormatter;
-import java.time.LocalDateTime;
-import java.util.Random;
-
+import java.sql.ResultSet;
 import javax.servlet.http.HttpSession;
-import com.scorpionsstudio.FoodHeaven.ConnectionBlock;
 
-@WebServlet(name = "AdminSignUpServlet", value = "/AdminSignUpServlet")
-@MultipartConfig(fileSizeThreshold=1024*1024*5, // 2MB
+@WebServlet(name = "UploadFoodInfoServlet", value = "/UploadFoodInfoServlet")
+@MultipartConfig(fileSizeThreshold=1024*1024*5, // 5MB
         maxFileSize=1024*1024*10,      // 10MB
         maxRequestSize=1024*1024*50)   // 50MB
-public class AdminSignUpServlet extends ConnectionBlock {
+public class UploadFoodInfo extends ConnectionBlock {
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
-
-    }
     private static final String SAVE_DIR = "resources";
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Part filePart = request.getPart("file_logo");
+        Part filePart = request.getPart("food_image");
         String photo="";
         String path="E:\\Java projects\\FoodHeaven\\src\\main\\webapp\\resources\\uploads";
         File file=new File(path);
@@ -58,31 +48,18 @@ public class AdminSignUpServlet extends ConnectionBlock {
 
 
             }
-            ps = con.prepareStatement("SELECT email FROM admin WHERE email = ?");
-            ps.setString(1, request.getParameter("email"));
-            rs = ps.executeQuery();
+            ps = con.prepareStatement("INSERT INTO foods (id, admin_id , name, description, price, image) VALUES(null,?, ?, ?, ?, ?)");
 
-            if(rs.next() != true)
-            {
-                ps = con.prepareStatement("INSERT INTO admin (id, restaurant_name, city, email, password, logo) VALUES(null,?, ?, ?, ?, ?)");
-
-                ps.setString(1, request.getParameter("restaurant_name"));
-                ps.setString(2, request.getParameter("city"));
-                ps.setString(3, request.getParameter("email"));
-                ps.setString(4, request.getParameter("password"));
-                ps.setString(5, tempName);
+            ps.setString(1, request.getParameter("admin_id"));
+            ps.setString(2, request.getParameter("name"));
+            ps.setString(3, request.getParameter("description"));
+            ps.setString(4, request.getParameter("price"));
+            ps.setString(5, tempName);
 
 
-                ps.executeUpdate();
-                response.sendRedirect("");
-            }
-            else
-            {
-                writer.println("User Already Exists");
-            }
-
+            ps.executeUpdate();
             request.setAttribute("message", "Success");
-            response.sendRedirect("admin");
+            response.sendRedirect("admin/dashboard");
 
         }
         catch(Exception e)
@@ -110,5 +87,4 @@ public class AdminSignUpServlet extends ConnectionBlock {
 
         return meep;
     }
-
 }

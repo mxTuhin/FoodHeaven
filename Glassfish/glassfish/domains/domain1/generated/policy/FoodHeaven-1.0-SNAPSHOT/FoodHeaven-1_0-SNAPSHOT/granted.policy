@@ -1,0 +1,21 @@
+/* AUTOMATICALLY GENERATED ON Mon May 03 14:40:21 BDT 2021*/
+/* DO NOT EDIT */
+
+grant {
+  permission javax.security.jacc.WebResourcePermission "/";
+  permission javax.security.jacc.WebUserDataPermission "/";
+};
+
+grant      principal * * {
+  permission javax.security.jacc.WebRoleRefPermission "jsp", "**";
+  permission javax.security.jacc.WebRoleRefPermission "", "**";
+  permission javax.security.jacc.WebRoleRefPermission "SignUpServlet", "**";
+  permission javax.security.jacc.WebRoleRefPermission "LogoutServlet", "**";
+  permission javax.security.jacc.WebRoleRefPermission "AdminSignInServlet", "**";
+  permission javax.security.jacc.WebRoleRefPermission "AdminSignUpServlet", "**";
+  permission javax.security.jacc.WebRoleRefPermission "default", "**";
+  permission javax.security.jacc.WebRoleRefPermission "UploadFoodInfoServlet", "**";
+  permission javax.security.jacc.WebRoleRefPermission "landingPage", "**";
+  permission javax.security.jacc.WebRoleRefPermission "LoginServlet", "**";
+};
+

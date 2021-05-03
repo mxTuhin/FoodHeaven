@@ -10,7 +10,7 @@
     <div class="navbar-wrapper ">
         <div class="navbar-brand header-logo">
             <a href="index.html" class="b-brand">
-                <img src="<%= StaticVars.baseURL%>admin/images/logo.svg" alt="" class="logo images">
+                <img style="height: 50px" src="<%= StaticVars.baseURL%>admin/images/logo.png" alt="" class="logo images">
                 <img src="<%= StaticVars.baseURL%>admin/images/logo-icon.svg" alt="" class="logo-thumb images">
             </a>
             <a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
@@ -69,15 +69,7 @@
                 <li class="nav-item"><a href="sample-page.html" class="nav-link"><span class="pcoded-micon"><i class="feather icon-sidebar"></i></span><span class="pcoded-mtext">Sample page</span></a></li>
                 <li class="nav-item disabled"><a href="#!" class="nav-link"><span class="pcoded-micon"><i class="feather icon-power"></i></span><span class="pcoded-mtext">Disabled menu</span></a></li>
             </ul>
-            <div class="card text-center">
-                <div class="card-block">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <i class="feather icon-sunset f-40"></i>
-                    <h6 class="mt-3">Upgrade to pro</h6>
-                    <p>upgrade for get full themes and 30min support</p>
-                    <a href="https://codedthemes.com/item/flash-able-bootstrap-admin-template/" target="_blank" class="btn btn-gradient-primary btn-sm text-white m-0">Upgrade</a>
-                </div>
-            </div>
+
         </div>
     </div>
 </nav>

@@ -7,6 +7,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.scorpionsstudio.FoodHeaven.*" %>
+<%@ page import="java.sql.ResultSet" %>
+<%
+    ResultSet rsLoc= (ResultSet) session.getAttribute("user");
+%>
 <html>
 <head>
 
