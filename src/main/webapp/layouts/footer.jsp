@@ -9,6 +9,23 @@
 <%@
         page import="com.scorpionsstudio.FoodHeaven.*"
 %>
+<%@ page import="com.scorpionsstudio.FoodHeaven.ConnectionBlock" %>
+<%@ page import="java.sql.ResultSet" %>
+<%
+    ResultSet rsLoc= (ResultSet) session.getAttribute("user");
+    ConnectionBlock cb=new ConnectionBlock();
+    ResultSet latestFood=null;
+    try{
+        cb.ps = cb.con.prepareStatement("SELECT * FROM foods ORDER BY id DESC LIMIT 6");
+        cb.rs = cb.ps.executeQuery();
+        latestFood= cb.rs;
+    }
+    catch (Exception e){
+        System.out.println("meow");
+    }
+
+
+%>
 <footer>
     <div class="container">
         <div class="row">
@@ -55,24 +72,18 @@
                 <div class="block">
                     <h4>Featured</h4>
                     <div class="media">
+                        <%
+
+                            while (latestFood.next()){
+
+
+                        %>
                         <a class="pull-left" href="#">
-                            <img class="media-object" src="<%=StaticVars.baseURL%>images/product-item.jpg" alt="...">
+                            <img class="media-object" src="<%=StaticVars.baseURL%>uploads/<%=latestFood.getString("image")%>" alt="...">
                         </a>
-                        <a class="pull-left" href="#">
-                            <img class="media-object" src="<%=StaticVars.baseURL%>images/product-item.jpg" alt="...">
-                        </a>
-                        <a class="pull-left" href="#">
-                            <img class="media-object" src="<%=StaticVars.baseURL%>images/product-item.jpg" alt="...">
-                        </a>
-                        <a class="pull-left" href="#">
-                            <img class="media-object" src="<%=StaticVars.baseURL%>images/product-item.jpg" alt="...">
-                        </a>
-                        <a class="pull-left" href="#">
-                            <img class="media-object" src="<%=StaticVars.baseURL%>images/product-item.jpg" alt="...">
-                        </a>
-                        <a class="pull-left" href="#">
-                            <img class="media-object" src="<%=StaticVars.baseURL%>images/product-item.jpg" alt="...">
-                        </a>
+                       <%
+                           }
+                       %>
                     </div>	<!-- End Of /.media -->
                 </div>	<!-- End Of /.block -->
             </div> <!-- End Of Col-md-3 -->

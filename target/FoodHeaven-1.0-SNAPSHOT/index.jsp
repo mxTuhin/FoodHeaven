@@ -2,7 +2,24 @@
 <%@
     page import="com.scorpionsstudio.FoodHeaven.*"
 %>
+<%@ page import="com.scorpionsstudio.FoodHeaven.ConnectionBlock" %>
+<%@ page import="java.sql.ResultSet" %>
 <jsp:include page="layouts/app.jsp"/>
+<%
+    ResultSet rsLoc= (ResultSet) session.getAttribute("user");
+    ConnectionBlock cb=new ConnectionBlock();
+    ResultSet restaurants=null;
+    try{
+        cb.ps = cb.con.prepareStatement("SELECT * FROM admin ORDER BY id DESC");
+        cb.rs = cb.ps.executeQuery();
+        restaurants= cb.rs;
+    }
+    catch (Exception e){
+        System.out.println("meow");
+    }
+
+
+%>
 <head>
     <title>FoodHeaven</title>
 </head>
@@ -161,112 +178,42 @@
             </div>
         </div>
         <div class="row">
+            <%
+                int i =1;
+                while (restaurants.next()){
+
+
+            %>
             <div class="col-md-3">
                 <div class="products">
-                    <a href="single-product.html">
-                        <img src="<%=StaticVars.baseURL%>images/product-image.jpg" alt="">
+                    <a href="shop/?id=<%=restaurants.getInt("id")%>">
+                        <img style="height: 280px !important;" src="<%=StaticVars.baseURL%>uploads/<%=restaurants.getString("logo")%>" alt="">
                     </a>
                     <a href="single-product.html">
-                        <h4>Amazing Italian Sauces</h4>
+                        <h4><%=restaurants.getString("restaurant_name")%></h4>
                     </a>
-                    <p class="price">From: £69.99</p>
                     <a class="view-link shutter" href="#">
-                        <i class="fa fa-plus-circle"></i>Add To Cart</a>
+                        Check Offers</a>
                 </div>	<!-- End of /.products -->
             </div>	<!-- End of /.col-md-3 -->
-            <div class="col-md-3">
-                <div class="products">
-                    <a href="single-product.html">
-                        <img src="<%=StaticVars.baseURL%>images/product-image-2.jpg" alt="">
-                    </a>
-                    <a href="single-product.html">
-                        <h4>Amazing Italian Sauces</h4>
-                    </a>
-                    <p class="price">From: £69.99</p>
-                    <a class="view-link shutter" href="#">
-                        <i class="fa fa-plus-circle"></i>Add To Cart</a>
-                </div>	<!-- End of /.products -->
-            </div> <!-- End Of Col-md-3 -->
-            <div class="col-md-3">
-                <div class="products">
-                    <a href="single-product.html">
-                        <img src="<%=StaticVars.baseURL%>images/product-image-3.jpg" alt="">
-                    </a>
-                    <a href="single-product.html">
-                        <h4>Amazing Italian Sauces</h4>
-                    </a>
-                    <p class="price">From: £69.99</p>
-                    <a class="view-link shutter" href="#">
-                        <i class="fa fa-plus-circle"></i>Add To Cart</a>
-                </div>	<!-- End of /.products -->
-            </div> <!-- End Of /.Col-md-3 -->
-            <div class="col-md-3">
-                <div class="products">
-                    <a href="single-product.html">
-                        <img src="<%=StaticVars.baseURL%>images/product-image-4.jpg" alt="">
-                    </a>
-                    <a href="single-product.html">
-                        <h4>Amazing Italian Sauces</h4>
-                    </a>
-                    <p class="price">From: £69.99</p>
-                    <a class="view-link shutter" href="#">
-                        <i class="fa fa-plus-circle"></i>Add To Cart</a>
-                </div>	<!-- End of /.products -->
-            </div> <!-- End Of /.Col-md-3 -->
-            <div class="col-md-3">
-                <div class="products">
-                    <a href="single-product.html">
-                        <img src="<%=StaticVars.baseURL%>images/product-image-5.jpg" alt="">
-                    </a>
-                    <a href="single-product.html">
-                        <h4>Amazing Italian Sauces</h4>
-                    </a>
-                    <p class="price">From: £69.99</p>
-                    <a class="view-link shutter" href="#">
-                        <i class="fa fa-plus-circle"></i>Add To Cart</a>
-                </div>	<!-- End of /.products -->
-            </div> <!-- End Of /.Col-md-3 -->
-            <div class="col-md-3">
-                <div class="products">
-                    <a href="single-product.html">
-                        <img src="<%=StaticVars.baseURL%>images/product-image-6.jpg" alt="">
-                    </a>
-                    <a href="single-product.html">
-                        <h4>Amazing Italian Sauces</h4>
-                    </a>
-                    <p class="price">From: £69.99</p>
-                    <a class="view-link shutter" href="#">
-                        <i class="fa fa-plus-circle"></i>Add To Cart</a>
-                </div>	<!-- End of /.products -->
-            </div> <!-- End Of /.Col-md-3 -->
-            <div class="col-md-3">
-                <div class="products">
-                    <a href="single-product.html">
-                        <img src="<%=StaticVars.baseURL%>images/product-image-7.jpg" alt="">
-                    </a>
-                    <a href="single-product.html">
-                        <h4>Amazing Italian Sauces</h4>
-                    </a>
-                    <p class="price">From: £69.99</p>
-                    <a class="view-link shutter" href="#">
-                        <i class="fa fa-plus-circle"></i>Add To Cart</a>
-                </div>	<!-- End of /.products -->
-            </div> <!-- End Of /.Col-md-3 -->
-            <div class="col-md-3">
-                <div class="products">
-                    <a href="single-product.html">
-                        <img src="<%=StaticVars.baseURL%>images/product-image-8.jpg" alt="">
-                    </a>
-                    <a href="single-product.html">
-                        <h4>Amazing Italian Sauces</h4>
-                    </a>
-                    <p class="price">From: £69.99</p>
-                    <div >
-                        <a class="view-link shutter" href="#">
-                            <i class="fa fa-plus-circle"></i>Add To Cart</a>
-                    </div>
-                </div>	<!-- End of /.products -->
-            </div> <!-- End Of /.Col-md-3 -->
+            <%
+                }
+            %>
+
+<%--            <div class="col-md-3">--%>
+<%--                <div class="products">--%>
+<%--                    <a href="single-product.html">--%>
+<%--                        <img style="height: 280px !important;" src="<%=StaticVars.baseURL%>uploads/<%=restaurants.getString("logo")%>" alt="">--%>
+<%--                    </a>--%>
+<%--                    <a href="single-product.html">--%>
+<%--                        <h4><%=restaurants.getString("restaurant_name")%></h4>--%>
+<%--                    </a>--%>
+<%--                    <p class="price">From: £69.99</p>--%>
+<%--                    <a class="view-link shutter" href="#">--%>
+<%--                        <i class="fa fa-plus-circle"></i>Add To Cart</a>--%>
+<%--                </div>	<!-- End of /.products -->--%>
+<%--            </div>	<!-- End of /.col-md-3 -->--%>
+
         </div>	<!-- End of /.row -->
     </div>	<!-- End of /.container -->
 </section>	<!-- End of Section -->
@@ -287,6 +234,7 @@
                     </div>
                 </div>	<!-- End of /.block -->
                 <div id="owl-example" class="owl-carousel">
+
                     <div> <img src="<%=StaticVars.baseURL%>images/company-1.png" alt=""></div>
                     <div> <img src="<%=StaticVars.baseURL%>images/company-2.png" alt=""></div>
                     <div> <img src="<%=StaticVars.baseURL%>images/company-3.png" alt=""></div>

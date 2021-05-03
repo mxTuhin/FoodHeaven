@@ -63,70 +63,7 @@
                         <div class="row">
 
                             <!-- product profit start -->
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card prod-p-card bg-c-red">
-                                    <div class="card-body">
-                                        <div class="row align-items-center m-b-25">
-                                            <div class="col">
-                                                <h6 class="m-b-5 text-white">Total Profit </h6>
-                                                <h3 class="m-b-0 text-white">$1,783</h3>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-money-bill-alt text-c-red f-18"></i>
-                                            </div>
-                                        </div>
-                                        <p class="m-b-0 text-white"><span class="label label-danger m-r-10">+11%</span>From Previous Month</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card prod-p-card bg-c-blue">
-                                    <div class="card-body">
-                                        <div class="row align-items-center m-b-25">
-                                            <div class="col">
-                                                <h6 class="m-b-5 text-white">Total Orders</h6>
-                                                <h3 class="m-b-0 text-white">15,830</h3>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-database text-c-blue f-18"></i>
-                                            </div>
-                                        </div>
-                                        <p class="m-b-0 text-white"><span class="label label-primary m-r-10">+12%</span>From Previous Month</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card prod-p-card bg-c-green">
-                                    <div class="card-body">
-                                        <div class="row align-items-center m-b-25">
-                                            <div class="col">
-                                                <h6 class="m-b-5 text-white">Average Price</h6>
-                                                <h3 class="m-b-0 text-white">$6,780</h3>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-dollar-sign text-c-green f-18"></i>
-                                            </div>
-                                        </div>
-                                        <p class="m-b-0 text-white"><span class="label label-success m-r-10">+52%</span>From Previous Month</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card prod-p-card bg-c-yellow">
-                                    <div class="card-body">
-                                        <div class="row align-items-center m-b-25">
-                                            <div class="col">
-                                                <h6 class="m-b-5 text-white">Product Sold</h6>
-                                                <h3 class="m-b-0 text-white">6,784</h3>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-tags text-c-yellow f-18"></i>
-                                            </div>
-                                        </div>
-                                        <p class="m-b-0 text-white"><span class="label label-warning m-r-10">+52%</span>From Previous Month</p>
-                                    </div>
-                                </div>
-                            </div>
+                                <jsp:include page="../layouts/analytics.jsp"/>
                             <!-- product profit end -->
                             <div class="col-md-12 col-xl-7">
                                 <div class="card card-social">
@@ -139,7 +76,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="card-block">
+                                    <div style="overflow: auto" class="card-block">
                                         <div class="row align-items-center justify-content-center card-active">
                                             <table class="table table-inverse">
                                                 <thead>
@@ -157,8 +94,9 @@
                                                 </thead>
                                                 <tbody>
                                                 <%
+                                                    int i =1;
                                                     while (rsFood.next()){
-                                                        int i =1;
+
 
                                                 %>
                                                 <tr>
@@ -170,14 +108,14 @@
                                                         <div align="center" class="container">
                                                             <div class="row">
                                                                 <div class="col-6 col-sm-6">
-                                                                    <button style="width: 55px" class="btn btn-info">
+                                                                    <button onclick="update_foods('<%=rsFood.getInt("id")%>','<%=rsFood.getString("name")%>', '<%=rsFood.getString("price")%>', '<%=rsFood.getString("description")%>', '<%=rsFood.getString("image")%>' )" style="width: 55px" class="btn btn-info" data-toggle="modal" data-target="#FoodUpdateModal">
                                                                         <i class="fas fa-edit"></i>
                                                                     </button>
                                                                 </div>
                                                                 <div class="col-6 col-sm-6">
-                                                                    <button style="width: 55px" class="btn btn-danger">
+                                                                    <a href="${pageContext.request.contextPath}/DeleteFoodServlet?id=<%=rsFood.getInt("id")%>" style="width: 55px; color: white" class="btn btn-danger">
                                                                         <i class="fas fa-times"></i>
-                                                                    </button>
+                                                                    </a>
                                                                 </div>
 
                                                             </div>
@@ -233,8 +171,8 @@
                                                         <label>Food Image</label>
                                                         <input type="file" class="form-control" name="food_image" required>
                                                     </div>
-                                                    <div style="padding-top: 10px" class="container">
-                                                        <input type="submit" class="btn btn-info form-control" value="Submit">
+                                                    <div align="center" style="padding-top: 10px" class="container">
+                                                        <input type="submit" class="btn btn-info form-control w-75" value="Submit">
                                                     </div>
 
 
@@ -255,6 +193,65 @@
         </div>
     </div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="FoodUpdateModal" tabindex="-1" role="dialog" aria-labelledby="FoodUpdateModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered  modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="FoodUpdateModalTitle">Update Food Information</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="${pageContext.request.contextPath}/UpdateFoodServlet">
+                    <div class="row">
+                        <div align="center" class="col-12 col-sm-12">
+                            <img id="food_image_existing" src="<%= StaticVars.baseURL%>uploads/69.6180287518262category-image-1.jpg">
+                        </div>
+                        <div class="col-6 col-sm-6">
+                            <label>Food Name</label>
+                            <input class="form-control" type="text" name="food_id" id="food_id" placeholder="ID of the Food" hidden>
+                            <input class="form-control" type="text" name="food_name" id="food_name" placeholder="Name of the Food">
+                        </div>
+                        <div class="col-6 col-sm-6">
+                            <label>Food Price</label>
+                            <input class="form-control" type="text" name="food_price" id="food_price" placeholder="Price of the Food">
+                        </div>
+                        <div class="col-12 col-sm-12">
+                            <label>Food Description</label>
+                            <input class="form-control" type="text" name="food_price" id="food_description" placeholder="Description of the Food">
+                        </div>
+
+
+                        <br><br><br><br><br>
+                        <div align="center" class="col-12 col-sm-12">
+                            <input type="submit" class="form-control w-75 btn btn-info" name="food_image_update" value="Submit" required>
+                        </div>
+
+
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function update_foods(id, name, price, description, image){
+        document.getElementById("food_id").value=id;
+        document.getElementById("food_name").value=name;
+        document.getElementById("food_price").value=price;
+        document.getElementById("food_description").value=description;
+        document.getElementById("food_image_existing").src="<%= StaticVars.baseURL%>"+"uploads/"+image;
+
+    }
+</script>
 </body>
 <%
     }else{

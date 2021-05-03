@@ -4,6 +4,8 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 import com.scorpionsstudio.FoodHeaven.*;
+import com.scorpionsstudio.FoodHeaven.ConnectionBlock;
+import java.sql.ResultSet;
 
 public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
@@ -43,9 +45,27 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
-      out.write('\n');
-      out.write('\n');
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
       org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "layouts/app.jsp", out, false);
+      out.write('\n');
+
+    ResultSet rsLoc= (ResultSet) session.getAttribute("user");
+    ConnectionBlock cb=new ConnectionBlock();
+    ResultSet restaurants=null;
+    try{
+        cb.ps = cb.con.prepareStatement("SELECT * FROM admin ORDER BY id DESC");
+        cb.rs = cb.ps.executeQuery();
+        restaurants= cb.rs;
+    }
+    catch (Exception e){
+        System.out.println("meow");
+    }
+
+
+
       out.write("\n");
       out.write("<head>\n");
       out.write("    <title>FoodHeaven</title>\n");
@@ -217,128 +237,54 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            </div>\n");
       out.write("        </div>\n");
       out.write("        <div class=\"row\">\n");
+      out.write("            ");
+
+                int i =1;
+                while (restaurants.next()){
+
+
+            
+      out.write("\n");
       out.write("            <div class=\"col-md-3\">\n");
       out.write("                <div class=\"products\">\n");
-      out.write("                    <a href=\"single-product.html\">\n");
-      out.write("                        <img src=\"");
+      out.write("                    <a href=\"shop/?id=");
+      out.print(restaurants.getInt("id"));
+      out.write("\">\n");
+      out.write("                        <img style=\"height: 280px !important;\" src=\"");
       out.print(StaticVars.baseURL);
-      out.write("images/product-image.jpg\" alt=\"\">\n");
+      out.write("uploads/");
+      out.print(restaurants.getString("logo"));
+      out.write("\" alt=\"\">\n");
       out.write("                    </a>\n");
       out.write("                    <a href=\"single-product.html\">\n");
-      out.write("                        <h4>Amazing Italian Sauces</h4>\n");
+      out.write("                        <h4>");
+      out.print(restaurants.getString("restaurant_name"));
+      out.write("</h4>\n");
       out.write("                    </a>\n");
-      out.write("                    <p class=\"price\">From: £69.99</p>\n");
       out.write("                    <a class=\"view-link shutter\" href=\"#\">\n");
-      out.write("                        <i class=\"fa fa-plus-circle\"></i>Add To Cart</a>\n");
+      out.write("                        Check Offers</a>\n");
       out.write("                </div>\t<!-- End of /.products -->\n");
       out.write("            </div>\t<!-- End of /.col-md-3 -->\n");
-      out.write("            <div class=\"col-md-3\">\n");
-      out.write("                <div class=\"products\">\n");
-      out.write("                    <a href=\"single-product.html\">\n");
-      out.write("                        <img src=\"");
-      out.print(StaticVars.baseURL);
-      out.write("images/product-image-2.jpg\" alt=\"\">\n");
-      out.write("                    </a>\n");
-      out.write("                    <a href=\"single-product.html\">\n");
-      out.write("                        <h4>Amazing Italian Sauces</h4>\n");
-      out.write("                    </a>\n");
-      out.write("                    <p class=\"price\">From: £69.99</p>\n");
-      out.write("                    <a class=\"view-link shutter\" href=\"#\">\n");
-      out.write("                        <i class=\"fa fa-plus-circle\"></i>Add To Cart</a>\n");
-      out.write("                </div>\t<!-- End of /.products -->\n");
-      out.write("            </div> <!-- End Of Col-md-3 -->\n");
-      out.write("            <div class=\"col-md-3\">\n");
-      out.write("                <div class=\"products\">\n");
-      out.write("                    <a href=\"single-product.html\">\n");
-      out.write("                        <img src=\"");
-      out.print(StaticVars.baseURL);
-      out.write("images/product-image-3.jpg\" alt=\"\">\n");
-      out.write("                    </a>\n");
-      out.write("                    <a href=\"single-product.html\">\n");
-      out.write("                        <h4>Amazing Italian Sauces</h4>\n");
-      out.write("                    </a>\n");
-      out.write("                    <p class=\"price\">From: £69.99</p>\n");
-      out.write("                    <a class=\"view-link shutter\" href=\"#\">\n");
-      out.write("                        <i class=\"fa fa-plus-circle\"></i>Add To Cart</a>\n");
-      out.write("                </div>\t<!-- End of /.products -->\n");
-      out.write("            </div> <!-- End Of /.Col-md-3 -->\n");
-      out.write("            <div class=\"col-md-3\">\n");
-      out.write("                <div class=\"products\">\n");
-      out.write("                    <a href=\"single-product.html\">\n");
-      out.write("                        <img src=\"");
-      out.print(StaticVars.baseURL);
-      out.write("images/product-image-4.jpg\" alt=\"\">\n");
-      out.write("                    </a>\n");
-      out.write("                    <a href=\"single-product.html\">\n");
-      out.write("                        <h4>Amazing Italian Sauces</h4>\n");
-      out.write("                    </a>\n");
-      out.write("                    <p class=\"price\">From: £69.99</p>\n");
-      out.write("                    <a class=\"view-link shutter\" href=\"#\">\n");
-      out.write("                        <i class=\"fa fa-plus-circle\"></i>Add To Cart</a>\n");
-      out.write("                </div>\t<!-- End of /.products -->\n");
-      out.write("            </div> <!-- End Of /.Col-md-3 -->\n");
-      out.write("            <div class=\"col-md-3\">\n");
-      out.write("                <div class=\"products\">\n");
-      out.write("                    <a href=\"single-product.html\">\n");
-      out.write("                        <img src=\"");
-      out.print(StaticVars.baseURL);
-      out.write("images/product-image-5.jpg\" alt=\"\">\n");
-      out.write("                    </a>\n");
-      out.write("                    <a href=\"single-product.html\">\n");
-      out.write("                        <h4>Amazing Italian Sauces</h4>\n");
-      out.write("                    </a>\n");
-      out.write("                    <p class=\"price\">From: £69.99</p>\n");
-      out.write("                    <a class=\"view-link shutter\" href=\"#\">\n");
-      out.write("                        <i class=\"fa fa-plus-circle\"></i>Add To Cart</a>\n");
-      out.write("                </div>\t<!-- End of /.products -->\n");
-      out.write("            </div> <!-- End Of /.Col-md-3 -->\n");
-      out.write("            <div class=\"col-md-3\">\n");
-      out.write("                <div class=\"products\">\n");
-      out.write("                    <a href=\"single-product.html\">\n");
-      out.write("                        <img src=\"");
-      out.print(StaticVars.baseURL);
-      out.write("images/product-image-6.jpg\" alt=\"\">\n");
-      out.write("                    </a>\n");
-      out.write("                    <a href=\"single-product.html\">\n");
-      out.write("                        <h4>Amazing Italian Sauces</h4>\n");
-      out.write("                    </a>\n");
-      out.write("                    <p class=\"price\">From: £69.99</p>\n");
-      out.write("                    <a class=\"view-link shutter\" href=\"#\">\n");
-      out.write("                        <i class=\"fa fa-plus-circle\"></i>Add To Cart</a>\n");
-      out.write("                </div>\t<!-- End of /.products -->\n");
-      out.write("            </div> <!-- End Of /.Col-md-3 -->\n");
-      out.write("            <div class=\"col-md-3\">\n");
-      out.write("                <div class=\"products\">\n");
-      out.write("                    <a href=\"single-product.html\">\n");
-      out.write("                        <img src=\"");
-      out.print(StaticVars.baseURL);
-      out.write("images/product-image-7.jpg\" alt=\"\">\n");
-      out.write("                    </a>\n");
-      out.write("                    <a href=\"single-product.html\">\n");
-      out.write("                        <h4>Amazing Italian Sauces</h4>\n");
-      out.write("                    </a>\n");
-      out.write("                    <p class=\"price\">From: £69.99</p>\n");
-      out.write("                    <a class=\"view-link shutter\" href=\"#\">\n");
-      out.write("                        <i class=\"fa fa-plus-circle\"></i>Add To Cart</a>\n");
-      out.write("                </div>\t<!-- End of /.products -->\n");
-      out.write("            </div> <!-- End Of /.Col-md-3 -->\n");
-      out.write("            <div class=\"col-md-3\">\n");
-      out.write("                <div class=\"products\">\n");
-      out.write("                    <a href=\"single-product.html\">\n");
-      out.write("                        <img src=\"");
-      out.print(StaticVars.baseURL);
-      out.write("images/product-image-8.jpg\" alt=\"\">\n");
-      out.write("                    </a>\n");
-      out.write("                    <a href=\"single-product.html\">\n");
-      out.write("                        <h4>Amazing Italian Sauces</h4>\n");
-      out.write("                    </a>\n");
-      out.write("                    <p class=\"price\">From: £69.99</p>\n");
-      out.write("                    <div >\n");
-      out.write("                        <a class=\"view-link shutter\" href=\"#\">\n");
-      out.write("                            <i class=\"fa fa-plus-circle\"></i>Add To Cart</a>\n");
-      out.write("                    </div>\n");
-      out.write("                </div>\t<!-- End of /.products -->\n");
-      out.write("            </div> <!-- End Of /.Col-md-3 -->\n");
+      out.write("            ");
+
+                }
+            
+      out.write('\n');
+      out.write('\n');
+      out.write('\n');
+      out.write('\n');
+      out.write('\n');
+      out.write('\n');
+      out.write('\n');
+      out.write('\n');
+      out.write('\n');
+      out.write('\n');
+      out.write('\n');
+      out.write('\n');
+      out.write('\n');
+      out.write('\n');
+      out.write("\n");
+      out.write("\n");
       out.write("        </div>\t<!-- End of /.row -->\n");
       out.write("    </div>\t<!-- End of /.container -->\n");
       out.write("</section>\t<!-- End of Section -->\n");
@@ -359,6 +305,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    </div>\n");
       out.write("                </div>\t<!-- End of /.block -->\n");
       out.write("                <div id=\"owl-example\" class=\"owl-carousel\">\n");
+      out.write("\n");
       out.write("                    <div> <img src=\"");
       out.print(StaticVars.baseURL);
       out.write("images/company-1.png\" alt=\"\"></div>\n");

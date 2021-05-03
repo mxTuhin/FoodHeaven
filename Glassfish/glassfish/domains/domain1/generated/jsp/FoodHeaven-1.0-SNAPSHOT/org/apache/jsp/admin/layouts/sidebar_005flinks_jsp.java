@@ -48,7 +48,7 @@ public final class sidebar_005flinks_jsp extends org.apache.jasper.runtime.HttpJ
       out.write("<nav class=\"pcoded-navbar menupos-fixed menu-light brand-blue \">\r\n");
       out.write("    <div class=\"navbar-wrapper \">\r\n");
       out.write("        <div class=\"navbar-brand header-logo\">\r\n");
-      out.write("            <a href=\"index.html\" class=\"b-brand\">\r\n");
+      out.write("            <a href=\"../dashboard\" class=\"b-brand\">\r\n");
       out.write("                <img style=\"height: 50px\" src=\"");
       out.print( StaticVars.baseURL);
       out.write("admin/images/logo.png\" alt=\"\" class=\"logo images\">\r\n");
@@ -64,7 +64,7 @@ public final class sidebar_005flinks_jsp extends org.apache.jasper.runtime.HttpJ
       out.write("                    <label>Navigation</label>\r\n");
       out.write("                </li>\r\n");
       out.write("                <li class=\"nav-item\">\r\n");
-      out.write("                    <a href=\"index.html\" class=\"nav-link\"><span class=\"pcoded-micon\"><i class=\"feather icon-home\"></i></span><span class=\"pcoded-mtext\">Dashboard</span></a>\r\n");
+      out.write("                    <a href=\"../dashboard\" class=\"nav-link\"><span class=\"pcoded-micon\"><i class=\"feather icon-home\"></i></span><span class=\"pcoded-mtext\">Dashboard</span></a>\r\n");
       out.write("                </li>\r\n");
       out.write("\r\n");
       out.write("                <li class=\"nav-item pcoded-menu-caption\">\r\n");

@@ -4,6 +4,8 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 import com.scorpionsstudio.FoodHeaven.*;
+import com.scorpionsstudio.FoodHeaven.ConnectionBlock;
+import java.sql.ResultSet;
 
 public final class footer_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
@@ -45,6 +47,24 @@ public final class footer_jsp extends org.apache.jasper.runtime.HttpJspBase
 
       out.write("\r\n");
       out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+
+    ResultSet rsLoc= (ResultSet) session.getAttribute("user");
+    ConnectionBlock cb=new ConnectionBlock();
+    ResultSet latestFood=null;
+    try{
+        cb.ps = cb.con.prepareStatement("SELECT * FROM foods ORDER BY id DESC LIMIT 6");
+        cb.rs = cb.ps.executeQuery();
+        latestFood= cb.rs;
+    }
+    catch (Exception e){
+        System.out.println("meow");
+    }
+
+
+
       out.write("\r\n");
       out.write("<footer>\r\n");
       out.write("    <div class=\"container\">\r\n");
@@ -94,36 +114,26 @@ public final class footer_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                <div class=\"block\">\r\n");
       out.write("                    <h4>Featured</h4>\r\n");
       out.write("                    <div class=\"media\">\r\n");
+      out.write("                        ");
+
+
+                            while (latestFood.next()){
+
+
+                        
+      out.write("\r\n");
       out.write("                        <a class=\"pull-left\" href=\"#\">\r\n");
       out.write("                            <img class=\"media-object\" src=\"");
       out.print(StaticVars.baseURL);
-      out.write("images/product-item.jpg\" alt=\"...\">\r\n");
+      out.write("uploads/");
+      out.print(latestFood.getString("image"));
+      out.write("\" alt=\"...\">\r\n");
       out.write("                        </a>\r\n");
-      out.write("                        <a class=\"pull-left\" href=\"#\">\r\n");
-      out.write("                            <img class=\"media-object\" src=\"");
-      out.print(StaticVars.baseURL);
-      out.write("images/product-item.jpg\" alt=\"...\">\r\n");
-      out.write("                        </a>\r\n");
-      out.write("                        <a class=\"pull-left\" href=\"#\">\r\n");
-      out.write("                            <img class=\"media-object\" src=\"");
-      out.print(StaticVars.baseURL);
-      out.write("images/product-item.jpg\" alt=\"...\">\r\n");
-      out.write("                        </a>\r\n");
-      out.write("                        <a class=\"pull-left\" href=\"#\">\r\n");
-      out.write("                            <img class=\"media-object\" src=\"");
-      out.print(StaticVars.baseURL);
-      out.write("images/product-item.jpg\" alt=\"...\">\r\n");
-      out.write("                        </a>\r\n");
-      out.write("                        <a class=\"pull-left\" href=\"#\">\r\n");
-      out.write("                            <img class=\"media-object\" src=\"");
-      out.print(StaticVars.baseURL);
-      out.write("images/product-item.jpg\" alt=\"...\">\r\n");
-      out.write("                        </a>\r\n");
-      out.write("                        <a class=\"pull-left\" href=\"#\">\r\n");
-      out.write("                            <img class=\"media-object\" src=\"");
-      out.print(StaticVars.baseURL);
-      out.write("images/product-item.jpg\" alt=\"...\">\r\n");
-      out.write("                        </a>\r\n");
+      out.write("                       ");
+
+                           }
+                       
+      out.write("\r\n");
       out.write("                    </div>\t<!-- End Of /.media -->\r\n");
       out.write("                </div>\t<!-- End Of /.block -->\r\n");
       out.write("            </div> <!-- End Of Col-md-3 -->\r\n");
