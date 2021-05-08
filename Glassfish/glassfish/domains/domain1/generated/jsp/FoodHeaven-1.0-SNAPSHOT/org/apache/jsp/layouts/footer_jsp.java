@@ -107,7 +107,7 @@ public final class footer_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    <p ><i class=\"fa  fa-map-marker\"></i> <span><a style=\"color: white\" href=\"https://goo.gl/maps/kmoRyQDNo2UyMpnL7\" target=\"_blank\">Scorpions Studio,</a> </span>Narayanganj</p>\r\n");
       out.write("                    <p> <i class=\"fa  fa-phone\"></i> <span>Phone:</span> +880 1678710456 </p>\r\n");
       out.write("\r\n");
-      out.write("                    <p class=\"mail\"><i class=\"fa  fa-envelope\"></i>Eamil: <span>mail@mxtuhin.ninja</span></p>\r\n");
+      out.write("                    <p class=\"mail\"><i class=\"fa  fa-envelope\"></i><span>Phone:</span> mail@mxtuhin.ninja</p>\r\n");
       out.write("                </div>\t<!-- End Of /.block -->\r\n");
       out.write("            </div> <!-- End Of Col-md-3 -->\r\n");
       out.write("            <div class=\"col-md-4\">\r\n");

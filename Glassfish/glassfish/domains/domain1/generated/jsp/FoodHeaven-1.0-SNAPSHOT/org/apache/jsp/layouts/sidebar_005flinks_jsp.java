@@ -62,8 +62,13 @@ public final class sidebar_005flinks_jsp extends org.apache.jasper.runtime.HttpJ
       out.write("\r\n");
       out.write("        <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\r\n");
       out.write("            <ul class=\"nav navbar-nav nav-main\">\r\n");
-      out.write("                <li class=\"active\"><a href=\"#\">Home</a></li>\r\n");
-      out.write("                <li><a href=\"products.html\">Restaurants</a></li>\r\n");
+      out.write("                <li id=\"homeNavButton\"><a href=\"");
+      out.print(request.getContextPath());
+      out.write("\">Home</a></li>\r\n");
+      out.write("                <li id=\"restaurantNavButton\"><a href=\"");
+      out.print(request.getContextPath());
+      out.write("/restaurant/\">Restaurants</a></li>\r\n");
+      out.write("\r\n");
       out.write("\r\n");
       out.write("\r\n");
       out.write("\r\n");

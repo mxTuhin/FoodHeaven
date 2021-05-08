@@ -1,4 +1,4 @@
-/* AUTOMATICALLY GENERATED ON Mon May 03 21:22:54 BDT 2021*/
+/* AUTOMATICALLY GENERATED ON Sat May 08 14:35:03 BDT 2021*/
 /* DO NOT EDIT */
 
 grant {
@@ -12,8 +12,8 @@ grant      principal * * {
   permission javax.security.jacc.WebRoleRefPermission "DeleteFoodServlet", "**";
   permission javax.security.jacc.WebRoleRefPermission "SignUpServlet", "**";
   permission javax.security.jacc.WebRoleRefPermission "LogoutServlet", "**";
-  permission javax.security.jacc.WebRoleRefPermission "AdminSignInServlet", "**";
   permission javax.security.jacc.WebRoleRefPermission "AdminSignUpServlet", "**";
+  permission javax.security.jacc.WebRoleRefPermission "AdminSignInServlet", "**";
   permission javax.security.jacc.WebRoleRefPermission "UpdateFoodServlet", "**";
   permission javax.security.jacc.WebRoleRefPermission "default", "**";
   permission javax.security.jacc.WebRoleRefPermission "landingPage", "**";

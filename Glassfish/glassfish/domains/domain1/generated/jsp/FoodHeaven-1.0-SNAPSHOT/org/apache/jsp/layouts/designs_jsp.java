@@ -78,6 +78,8 @@ public final class designs_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    <link rel=\"stylesheet\" href=\"");
       out.print(StaticVars.baseURL);
       out.write("css/responsive.css\">\r\n");
+      out.write("    <link href=\"https://fonts.googleapis.com/icon?family=Material+Icons\"\r\n");
+      out.write("      rel=\"stylesheet\">\r\n");
       out.write("\r\n");
       out.write("    <!-- jS -->\r\n");
       out.write("    <script src=\"");

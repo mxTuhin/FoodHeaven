@@ -23,8 +23,9 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav nav-main">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="products.html">Restaurants</a></li>
+                <li id="homeNavButton"><a href="<%=request.getContextPath()%>">Home</a></li>
+                <li id="restaurantNavButton"><a href="<%=request.getContextPath()%>/restaurant/">Restaurants</a></li>
+
 
 
 

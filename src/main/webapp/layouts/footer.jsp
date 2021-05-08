@@ -65,7 +65,7 @@
                     <p ><i class="fa  fa-map-marker"></i> <span><a style="color: white" href="https://goo.gl/maps/kmoRyQDNo2UyMpnL7" target="_blank">Scorpions Studio,</a> </span>Narayanganj</p>
                     <p> <i class="fa  fa-phone"></i> <span>Phone:</span> +880 1678710456 </p>
 
-                    <p class="mail"><i class="fa  fa-envelope"></i>Eamil: <span>mail@mxtuhin.ninja</span></p>
+                    <p class="mail"><i class="fa  fa-envelope"></i><span>Phone:</span> mail@mxtuhin.ninja</p>
                 </div>	<!-- End Of /.block -->
             </div> <!-- End Of Col-md-3 -->
             <div class="col-md-4">
