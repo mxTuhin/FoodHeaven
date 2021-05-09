@@ -1,4 +1,5 @@
-<%@ page import="com.scorpionsstudio.FoodHeaven.StaticVars" %><%--
+<%@ page import="com.scorpionsstudio.FoodHeaven.StaticVars" %>
+<%@ page import="java.sql.ResultSet" %><%--
   Created by IntelliJ IDEA.
   User: mtuhi
   Date: 5/1/2021
@@ -6,6 +7,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    ResultSet rsLoc = (ResultSet) session.getAttribute("user");
+%>
 <nav class="pcoded-navbar menupos-fixed menu-light brand-blue ">
     <div class="navbar-wrapper ">
         <div class="navbar-brand header-logo">
@@ -32,6 +36,28 @@
                         <span class="pcoded-micon"><i class="feather icon-home"></i></span>
                         <span class="pcoded-mtext">Orders</span></a>
                 </li>
+
+<%--                Admin Block Starts --%>
+                <%
+                    if(rsLoc.getString("is_superadmin").equals("1")){
+                %>
+                <li class="nav-item pcoded-menu-caption">
+                    <label>Communication</label>
+                </li>
+                <li class="nav-item">
+                    <a href="<%=request.getContextPath()%>/admin/chat/" class="nav-link">
+                        <span class="pcoded-micon"><i class="feather icon-home"></i></span>
+                        <span class="pcoded-mtext">ChatBox</span></a>
+                </li>
+                <li class="nav-item">
+                    <a href="<%=request.getContextPath()%>/admin/report/" class="nav-link">
+                        <span class="pcoded-micon"><i class="feather icon-home"></i></span>
+                        <span class="pcoded-mtext">Reports</span></a>
+                </li>
+                <%
+                    }
+
+                %>
             </ul>
 
         </div>

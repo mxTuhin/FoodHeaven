@@ -7,6 +7,28 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.scorpionsstudio.FoodHeaven.*" %>
+<%@ page import="java.sql.ResultSet" %>
+<%
+    ResultSet rsLoc= (ResultSet) session.getAttribute("user");
+    ConnectionBlock cb=new ConnectionBlock();
+    ResultSet chat=null;
+    try{
+        String isLoggedIn = (String)session.getAttribute("isLoggedIn");
+        if(isLoggedIn=="true"){
+            int sender_id=rsLoc.getInt("id");
+
+            cb.ps = cb.con.prepareStatement("SELECT * FROM save_conversation WHERE sender_id=sender_id");
+            cb.rs = cb.ps.executeQuery();
+            chat=cb.rs;
+        }
+
+    }
+    catch (Exception e){
+        System.out.println("meow");
+    }
+
+
+%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -33,7 +55,7 @@
     color: white;
     padding: 28px;
     cursor: pointer;
-    box-shadow: 0px 3px 16px 0px rgba(0, 0, 0, 0.6), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+
     }
 
     .btn#my-btn {
@@ -68,7 +90,6 @@
     max-height:100vh;
     border-radius:5px;
     /*   box-shadow: 0px 5px 35px 9px #464a92; */
-    box-shadow: 0px 5px 35px 9px #ccc;
     }
     .chat-box-toggle {
     float:right;
@@ -233,8 +254,11 @@
 
 
 <jsp:include page="header.jsp"/>
-
-<div id="body">
+<%
+    String isLoggedIn = (String)session.getAttribute("isLoggedIn");
+    if(isLoggedIn=="true"){
+%>
+<div style="z-index: 100 !important;" id="body">
 
     <div id="chat-circle" class="btn btn-raised">
         <div id="chat-overlay"></div>
@@ -243,7 +267,7 @@
 
     <div class="chat-box">
         <div class="chat-box-header">
-            ChatBot
+            Communicate With Admin
             <span class="chat-box-toggle"><i class="material-icons">close</i></span>
         </div>
         <div class="chat-box-body">
@@ -260,14 +284,58 @@
             </form>
         </div>
     </div>
-
-
-
-
 </div>
 
+<%
+    }
+    else{
+%>
+<div id="body">
+
+    <div id="chat-circle" class="btn btn-raised">
+        <div id="chat-overlay"></div>
+        <i class="material-icons">speaker_phone</i>
+    </div>
+
+    <div class="chat-box">
+        <div class="chat-box-header">
+            Communicate with Admin
+            <span class="chat-box-toggle"><i class="material-icons">close</i></span>
+        </div>
+        <div class="chat-box-body">
+            <div class="chat-box-overlay">
+            </div>
+            <div class="chat-logs">
+                <b>Please Login First to start chatting</b>
+
+            </div><!--chat-log -->
+        </div>
+
+    </div>
+</div>
+<%
+    }
+%>
+
 <script>
+
     $(function() {
+        <%
+        if(isLoggedIn=="true"){
+        while (chat.next()){
+            String identifier ="";
+            if(chat.getString("identifier").equals("User")){
+                identifier="self";
+            }
+            else{
+                identifier="user";
+            }
+        %>
+        generate_message("<%=chat.getString("msg")%>", "<%=identifier%>")
+        <%
+        }
+        }
+        %>
         var INDEX = 0;
         $("#chat-submit").click(function(e) {
             e.preventDefault();
@@ -276,6 +344,19 @@
                 return false;
             }
             generate_message(msg, 'self');
+            $.ajax({
+                type : 'post',
+                url : '<%=request.getContextPath()%>/UserPostMessage',
+                data:{
+                    'msg':msg,
+
+                },
+                success:function(data){
+                    console.log(data);
+                    primData=data;
+
+                }
+            });
             var buttons = [
                 {
                     name: 'Existing User',
@@ -286,18 +367,25 @@
                     value: 'new'
                 }
             ];
-            setTimeout(function() {
-                generate_message(msg, 'user');
-            }, 1000)
+            // setTimeout(function() {
+            //     generate_message("Please Wait. Our Service Executive will connect to you soon", 'user');
+            // }, 1000)
 
         })
 
         function generate_message(msg, type) {
+            var profImg="";
+            if(type=="self"){
+                profImg="<%=request.getContextPath() %>/resources/uploads/profile.png";
+            }
+            else{
+                profImg="<%=request.getContextPath() %>/resources/images/food.png";
+            }
             INDEX++;
             var str="";
             str += "<div id='cm-msg-"+INDEX+"' class=\"chat-msg "+type+"\">";
             str += "          <span class=\"msg-avatar\">";
-            str += "            <img src=\"https:\/\/image.crisp.im\/avatar\/operator\/196af8cc-f6ad-4ef7-afd1-c45d5231387c\/240\/?1483361727745\">";
+            str += "            <img src="+profImg+">";
             str += "          <\/span>";
             str += "          <div class=\"cm-msg-text\">";
             str += msg;

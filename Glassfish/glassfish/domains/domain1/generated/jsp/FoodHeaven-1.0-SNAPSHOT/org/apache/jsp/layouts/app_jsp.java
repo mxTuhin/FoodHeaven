@@ -4,6 +4,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 import com.scorpionsstudio.FoodHeaven.*;
+import java.sql.ResultSet;
 
 public final class app_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
@@ -46,6 +47,29 @@ public final class app_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("\r\n");
       out.write("\r\n");
+      out.write("\r\n");
+
+    ResultSet rsLoc= (ResultSet) session.getAttribute("user");
+    ConnectionBlock cb=new ConnectionBlock();
+    ResultSet chat=null;
+    try{
+        String isLoggedIn = (String)session.getAttribute("isLoggedIn");
+        if(isLoggedIn=="true"){
+            int sender_id=rsLoc.getInt("id");
+
+            cb.ps = cb.con.prepareStatement("SELECT * FROM save_conversation WHERE sender_id=sender_id");
+            cb.rs = cb.ps.executeQuery();
+            chat=cb.rs;
+        }
+
+    }
+    catch (Exception e){
+        System.out.println("meow");
+    }
+
+
+
+      out.write("\r\n");
       out.write("<!doctype html>\r\n");
       out.write("<html lang=\"en\">\r\n");
       out.write("<head>\r\n");
@@ -73,7 +97,7 @@ public final class app_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    color: white;\r\n");
       out.write("    padding: 28px;\r\n");
       out.write("    cursor: pointer;\r\n");
-      out.write("    box-shadow: 0px 3px 16px 0px rgba(0, 0, 0, 0.6), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);\r\n");
+      out.write("\r\n");
       out.write("    }\r\n");
       out.write("\r\n");
       out.write("    .btn#my-btn {\r\n");
@@ -108,7 +132,6 @@ public final class app_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    max-height:100vh;\r\n");
       out.write("    border-radius:5px;\r\n");
       out.write("    /*   box-shadow: 0px 5px 35px 9px #464a92; */\r\n");
-      out.write("    box-shadow: 0px 5px 35px 9px #ccc;\r\n");
       out.write("    }\r\n");
       out.write("    .chat-box-toggle {\r\n");
       out.write("    float:right;\r\n");
@@ -273,9 +296,14 @@ public final class app_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("\r\n");
       org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "header.jsp", out, false);
+      out.write('\r');
+      out.write('\n');
+
+    String isLoggedIn = (String)session.getAttribute("isLoggedIn");
+    if(isLoggedIn=="true"){
+
       out.write("\r\n");
-      out.write("\r\n");
-      out.write("<div id=\"body\">\r\n");
+      out.write("<div style=\"z-index: 100 !important;\" id=\"body\">\r\n");
       out.write("\r\n");
       out.write("    <div id=\"chat-circle\" class=\"btn btn-raised\">\r\n");
       out.write("        <div id=\"chat-overlay\"></div>\r\n");
@@ -284,7 +312,7 @@ public final class app_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("    <div class=\"chat-box\">\r\n");
       out.write("        <div class=\"chat-box-header\">\r\n");
-      out.write("            ChatBot\r\n");
+      out.write("            Communicate With Admin\r\n");
       out.write("            <span class=\"chat-box-toggle\"><i class=\"material-icons\">close</i></span>\r\n");
       out.write("        </div>\r\n");
       out.write("        <div class=\"chat-box-body\">\r\n");
@@ -301,14 +329,68 @@ public final class app_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            </form>\r\n");
       out.write("        </div>\r\n");
       out.write("    </div>\r\n");
-      out.write("\r\n");
-      out.write("\r\n");
-      out.write("\r\n");
-      out.write("\r\n");
       out.write("</div>\r\n");
       out.write("\r\n");
+
+    }
+    else{
+
+      out.write("\r\n");
+      out.write("<div id=\"body\">\r\n");
+      out.write("\r\n");
+      out.write("    <div id=\"chat-circle\" class=\"btn btn-raised\">\r\n");
+      out.write("        <div id=\"chat-overlay\"></div>\r\n");
+      out.write("        <i class=\"material-icons\">speaker_phone</i>\r\n");
+      out.write("    </div>\r\n");
+      out.write("\r\n");
+      out.write("    <div class=\"chat-box\">\r\n");
+      out.write("        <div class=\"chat-box-header\">\r\n");
+      out.write("            Communicate with Admin\r\n");
+      out.write("            <span class=\"chat-box-toggle\"><i class=\"material-icons\">close</i></span>\r\n");
+      out.write("        </div>\r\n");
+      out.write("        <div class=\"chat-box-body\">\r\n");
+      out.write("            <div class=\"chat-box-overlay\">\r\n");
+      out.write("            </div>\r\n");
+      out.write("            <div class=\"chat-logs\">\r\n");
+      out.write("                <b>Please Login First to start chatting</b>\r\n");
+      out.write("\r\n");
+      out.write("            </div><!--chat-log -->\r\n");
+      out.write("        </div>\r\n");
+      out.write("\r\n");
+      out.write("    </div>\r\n");
+      out.write("</div>\r\n");
+
+    }
+
+      out.write("\r\n");
+      out.write("\r\n");
       out.write("<script>\r\n");
+      out.write("\r\n");
       out.write("    $(function() {\r\n");
+      out.write("        ");
+
+        if(isLoggedIn=="true"){
+        while (chat.next()){
+            String identifier ="";
+            if(chat.getString("identifier").equals("User")){
+                identifier="self";
+            }
+            else{
+                identifier="user";
+            }
+        
+      out.write("\r\n");
+      out.write("        generate_message(\"");
+      out.print(chat.getString("msg"));
+      out.write("\", \"");
+      out.print(identifier);
+      out.write("\")\r\n");
+      out.write("        ");
+
+        }
+        }
+        
+      out.write("\r\n");
       out.write("        var INDEX = 0;\r\n");
       out.write("        $(\"#chat-submit\").click(function(e) {\r\n");
       out.write("            e.preventDefault();\r\n");
@@ -317,6 +399,21 @@ public final class app_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                return false;\r\n");
       out.write("            }\r\n");
       out.write("            generate_message(msg, 'self');\r\n");
+      out.write("            $.ajax({\r\n");
+      out.write("                type : 'post',\r\n");
+      out.write("                url : '");
+      out.print(request.getContextPath());
+      out.write("/UserPostMessage',\r\n");
+      out.write("                data:{\r\n");
+      out.write("                    'msg':msg,\r\n");
+      out.write("\r\n");
+      out.write("                },\r\n");
+      out.write("                success:function(data){\r\n");
+      out.write("                    console.log(data);\r\n");
+      out.write("                    primData=data;\r\n");
+      out.write("\r\n");
+      out.write("                }\r\n");
+      out.write("            });\r\n");
       out.write("            var buttons = [\r\n");
       out.write("                {\r\n");
       out.write("                    name: 'Existing User',\r\n");
@@ -327,18 +424,29 @@ public final class app_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    value: 'new'\r\n");
       out.write("                }\r\n");
       out.write("            ];\r\n");
-      out.write("            setTimeout(function() {\r\n");
-      out.write("                generate_message(msg, 'user');\r\n");
-      out.write("            }, 1000)\r\n");
+      out.write("            // setTimeout(function() {\r\n");
+      out.write("            //     generate_message(\"Please Wait. Our Service Executive will connect to you soon\", 'user');\r\n");
+      out.write("            // }, 1000)\r\n");
       out.write("\r\n");
       out.write("        })\r\n");
       out.write("\r\n");
       out.write("        function generate_message(msg, type) {\r\n");
+      out.write("            var profImg=\"\";\r\n");
+      out.write("            if(type==\"self\"){\r\n");
+      out.write("                profImg=\"");
+      out.print(request.getContextPath() );
+      out.write("/resources/uploads/profile.png\";\r\n");
+      out.write("            }\r\n");
+      out.write("            else{\r\n");
+      out.write("                profImg=\"");
+      out.print(request.getContextPath() );
+      out.write("/resources/images/food.png\";\r\n");
+      out.write("            }\r\n");
       out.write("            INDEX++;\r\n");
       out.write("            var str=\"\";\r\n");
       out.write("            str += \"<div id='cm-msg-\"+INDEX+\"' class=\\\"chat-msg \"+type+\"\\\">\";\r\n");
       out.write("            str += \"          <span class=\\\"msg-avatar\\\">\";\r\n");
-      out.write("            str += \"            <img src=\\\"https:\\/\\/image.crisp.im\\/avatar\\/operator\\/196af8cc-f6ad-4ef7-afd1-c45d5231387c\\/240\\/?1483361727745\\\">\";\r\n");
+      out.write("            str += \"            <img src=\"+profImg+\">\";\r\n");
       out.write("            str += \"          <\\/span>\";\r\n");
       out.write("            str += \"          <div class=\\\"cm-msg-text\\\">\";\r\n");
       out.write("            str += msg;\r\n");

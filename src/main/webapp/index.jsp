@@ -9,10 +9,20 @@
     ResultSet rsLoc= (ResultSet) session.getAttribute("user");
     ConnectionBlock cb=new ConnectionBlock();
     ResultSet restaurants=null;
+    ResultSet chat=null;
     try{
         cb.ps = cb.con.prepareStatement("SELECT * FROM admin WHERE is_superadmin!=1 ORDER BY id DESC");
         cb.rs = cb.ps.executeQuery();
         restaurants= cb.rs;
+        String isLoggedIn = (String)session.getAttribute("isLoggedIn");
+        if(isLoggedIn=="true"){
+            int sender_id=rsLoc.getInt("id");
+
+            cb.ps = cb.con.prepareStatement("SELECT * FROM save_conversation WHERE sender_id=sender_id");
+            cb.rs = cb.ps.executeQuery();
+            chat=cb.rs;
+        }
+
     }
     catch (Exception e){
         System.out.println("meow");

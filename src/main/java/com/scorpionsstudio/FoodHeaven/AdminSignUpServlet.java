@@ -88,6 +88,7 @@ public class AdminSignUpServlet extends ConnectionBlock {
         catch(Exception e)
         {
             request.setAttribute("message", e);
+            writer.println(e);
 
         }
     }

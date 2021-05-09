@@ -28,7 +28,7 @@ public class LoginServlet extends ConnectionBlock {
 
 
 
-            ps = con.prepareStatement("SELECT email, password FROM user WHERE email = ? AND password = ?");
+            ps = con.prepareStatement("SELECT * FROM user WHERE email = ? AND password = ?");
 
             ps.setString(1, request.getParameter("email"));
             ps.setString(2, request.getParameter("password"));
@@ -38,6 +38,7 @@ public class LoginServlet extends ConnectionBlock {
             {
                 HttpSession session = request.getSession();
                 session.setAttribute("isLoggedIn", "true");
+                session.setAttribute("user", rs);
                 response.sendRedirect("");
 
             }
