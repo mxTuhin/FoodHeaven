@@ -1,4 +1,4 @@
-package org.apache.jsp.admin.chat;
+package org.apache.jsp.admin.report;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -62,22 +62,12 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
     ResultSet rsLoc= (ResultSet) session.getAttribute("user");
     ConnectionBlock cb=new ConnectionBlock();
     ResultSet rsFood=null;
-    ResultSet rsConversation=null;
     try{
         cb.ps = cb.con.prepareStatement("SELECT * FROM foods WHERE admin_id=?");
 
         cb.ps.setString(1, rsLoc.getString(1));
         cb.rs = cb.ps.executeQuery();
         rsFood= cb.rs;
-    }
-    catch (Exception e){
-        System.out.println("meow");
-    }
-    try{
-        cb.ps = cb.con.prepareStatement("SELECT * FROM save_conversation GROUP BY sender_id");
-        cb.rs = cb.ps.executeQuery();
-        rsConversation=cb.rs;
-
     }
     catch (Exception e){
         System.out.println("meow");
@@ -121,51 +111,154 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "../layouts/analytics.jsp", out, false);
       out.write("\r\n");
       out.write("                            <!-- product profit end -->\r\n");
-      out.write("                            <div class=\"container\">\r\n");
-      out.write("                                <div class=\"col-md-12 col-xl-12\">\r\n");
-      out.write("                                    <div class=\"card card-social\">\r\n");
-      out.write("                                        <div class=\"card-block border-bottom\">\r\n");
-      out.write("                                            <div class=\"row align-items-center justify-content-center\">\r\n");
+      out.write("                            <div class=\"col-md-12 col-xl-7\">\r\n");
+      out.write("                                <div class=\"card card-social\">\r\n");
+      out.write("                                    <div class=\"card-block border-bottom\">\r\n");
+      out.write("                                        <div class=\"row align-items-center justify-content-center\">\r\n");
       out.write("\r\n");
-      out.write("                                                <div class=\"col text-right\">\r\n");
-      out.write("                                                    <h3>Conversations</h3>\r\n");
-      out.write("                                                    <h6 class=\"text-c-blue mb-0\"> <span class=\"text-muted\">Sorted as Recent</span></h6>\r\n");
-      out.write("                                                </div>\r\n");
+      out.write("                                            <div class=\"col text-right\">\r\n");
+      out.write("                                                <h3>Manage Foods</h3>\r\n");
+      out.write("                                                <h5 class=\"text-c-blue mb-0\"> <span class=\"text-muted\">Food List</span></h5>\r\n");
       out.write("                                            </div>\r\n");
       out.write("                                        </div>\r\n");
-      out.write("                                        <br>\r\n");
-      out.write("                                        <div style=\"padding: 20px\" align=\"center\" class=\"row\">\r\n");
-      out.write("                                            ");
+      out.write("                                    </div>\r\n");
+      out.write("                                    <div style=\"overflow: auto\" class=\"card-block\">\r\n");
+      out.write("                                        <div class=\"row align-items-center justify-content-center card-active\">\r\n");
+      out.write("                                            <table class=\"table table-inverse\">\r\n");
+      out.write("                                                <thead>\r\n");
+      out.write("                                                <tr>\r\n");
+      out.write("                                                    <th>#</th>\r\n");
+      out.write("                                                    <th>Food Name</th>\r\n");
+      out.write("                                                    <th>Food Description</th>\r\n");
+      out.write("                                                    <th>Food Price</th>\r\n");
+      out.write("                                                    <th><div align=\"center\">\r\n");
+      out.write("                                                        Action\r\n");
+      out.write("\r\n");
+      out.write("                                                    </div></th>\r\n");
+      out.write("\r\n");
+      out.write("                                                </tr>\r\n");
+      out.write("                                                </thead>\r\n");
+      out.write("                                                <tbody>\r\n");
+      out.write("                                                ");
 
-                                                while (rsConversation.next()){
-                                            
-      out.write("\r\n");
-      out.write("                                            <div class=\"col-6 col-sm-3\">\r\n");
-      out.write("                                                <div style=\"border: 1px solid #3058DC; border-radius: 20px; padding-top: 20px; padding-bottom: 20px\" class=\"container\">\r\n");
-      out.write("                                                    <h3>");
-      out.print(rsConversation.getString("sender_name"));
-      out.write("</h3><br>\r\n");
-      out.write("                                                    <a style=\"color: white\" href=\"conversation.jsp?id=");
-      out.print(rsConversation.getInt("sender_id"));
-      out.write("&name=");
-      out.print(rsConversation.getString("sender_name"));
-      out.write("\" class=\"btn btn-info\">Open Conversation</a>\r\n");
-      out.write("                                                </div>\r\n");
-      out.write("                                            </div>\r\n");
-      out.write("                                            ");
+                                                    int i =1;
+                                                    while (rsFood.next()){
 
-                                                }
-                                            
+
+                                                
+      out.write("\r\n");
+      out.write("                                                <tr>\r\n");
+      out.write("                                                    <td>");
+      out.print(i);
+      out.write("</td>\r\n");
+      out.write("                                                    <td>");
+      out.print(rsFood.getString("name"));
+      out.write("</td>\r\n");
+      out.write("                                                    <td>");
+      out.print(rsFood.getString("description"));
+      out.write("</td>\r\n");
+      out.write("                                                    <td>");
+      out.print(rsFood.getString("price"));
+      out.write("</td>\r\n");
+      out.write("                                                    <td style=\"width: 150px\">\r\n");
+      out.write("                                                        <div align=\"center\" class=\"container\">\r\n");
+      out.write("                                                            <div class=\"row\">\r\n");
+      out.write("                                                                <div class=\"col-6 col-sm-6\">\r\n");
+      out.write("                                                                    <button onclick=\"update_foods('");
+      out.print(rsFood.getInt("id"));
+      out.write("','");
+      out.print(rsFood.getString("name"));
+      out.write("', '");
+      out.print(rsFood.getString("price"));
+      out.write("', '");
+      out.print(rsFood.getString("description"));
+      out.write("', '");
+      out.print(rsFood.getString("image"));
+      out.write("' )\" style=\"width: 55px\" class=\"btn btn-info\" data-toggle=\"modal\" data-target=\"#FoodUpdateModal\">\r\n");
+      out.write("                                                                        <i class=\"fas fa-edit\"></i>\r\n");
+      out.write("                                                                    </button>\r\n");
+      out.write("                                                                </div>\r\n");
+      out.write("                                                                <div class=\"col-6 col-sm-6\">\r\n");
+      out.write("                                                                    <a href=\"");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${pageContext.request.contextPath}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("/DeleteFoodServlet?id=");
+      out.print(rsFood.getInt("id"));
+      out.write("\" style=\"width: 55px; color: white\" class=\"btn btn-danger\">\r\n");
+      out.write("                                                                        <i class=\"fas fa-times\"></i>\r\n");
+      out.write("                                                                    </a>\r\n");
+      out.write("                                                                </div>\r\n");
+      out.write("\r\n");
+      out.write("                                                            </div>\r\n");
+      out.write("\r\n");
+      out.write("                                                        </div>\r\n");
+      out.write("                                                    </td>\r\n");
+      out.write("\r\n");
+      out.write("                                                </tr>\r\n");
+      out.write("                                                ");
+
+                                                        ++i;
+                                                    }
+                                                
       out.write("\r\n");
       out.write("\r\n");
+      out.write("                                                </tbody>\r\n");
+      out.write("                                            </table>\r\n");
       out.write("                                        </div>\r\n");
-      out.write("\r\n");
       out.write("                                    </div>\r\n");
       out.write("                                </div>\r\n");
       out.write("                            </div>\r\n");
       out.write("\r\n");
+      out.write("                            <div class=\"col-md-12 col-xl-5\">\r\n");
+      out.write("                                <div class=\"card card-social\">\r\n");
+      out.write("                                    <div class=\"card-block border-bottom\">\r\n");
+      out.write("                                        <div class=\"row align-items-center justify-content-center\">\r\n");
+      out.write("\r\n");
+      out.write("                                            <div class=\"col text-right\">\r\n");
+      out.write("                                                <h3>Add New Food</h3>\r\n");
+      out.write("\r\n");
+      out.write("                                            </div>\r\n");
+      out.write("                                        </div>\r\n");
+      out.write("                                    </div>\r\n");
+      out.write("                                    <div class=\"card-block\">\r\n");
+      out.write("\r\n");
+      out.write("                                        <div class=\"row align-items-center justify-content-center card-active\">\r\n");
+      out.write("                                            <h5>Upload Food Info</h5>\r\n");
+      out.write("\r\n");
+      out.write("                                            <div class=\"container\">\r\n");
+      out.write("                                                <form method=\"POST\" action=\"");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${pageContext.request.contextPath}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("/UploadFoodInfoServlet\" enctype=\"multipart/form-data\">\r\n");
+      out.write("                                                    <div>\r\n");
+      out.write("                                                        <label>Food Name</label>\r\n");
+      out.write("                                                        <input type=\"text\" class=\"form-control\" name=\"admin_id\" value=\"");
+      out.print(rsLoc.getInt("id"));
+      out.write("\" placeholder=\"Admin ID\" hidden required>\r\n");
+      out.write("                                                        <input type=\"text\" class=\"form-control\" name=\"name\" placeholder=\"Name of the Food\" required>\r\n");
+      out.write("                                                    </div>\r\n");
+      out.write("                                                    <div>\r\n");
+      out.write("                                                        <label>Food Description</label>\r\n");
+      out.write("                                                        <input type=\"text\" class=\"form-control\" name=\"description\" placeholder=\"Description of the Food\" required>\r\n");
+      out.write("                                                    </div>\r\n");
+      out.write("                                                    <div>\r\n");
+      out.write("                                                        <label>Food Price</label>\r\n");
+      out.write("                                                        <input type=\"text\" class=\"form-control\" name=\"price\" placeholder=\"Price of the Food\" required>\r\n");
+      out.write("                                                    </div>\r\n");
+      out.write("                                                    <div>\r\n");
+      out.write("                                                        <label>Food Image</label>\r\n");
+      out.write("                                                        <input type=\"file\" class=\"form-control\" name=\"food_image\" required>\r\n");
+      out.write("                                                    </div>\r\n");
+      out.write("                                                    <div align=\"center\" style=\"padding-top: 10px\" class=\"container\">\r\n");
+      out.write("                                                        <input type=\"submit\" class=\"btn btn-info form-control w-75\" value=\"Submit\">\r\n");
+      out.write("                                                    </div>\r\n");
       out.write("\r\n");
       out.write("\r\n");
+      out.write("                                                </form>\r\n");
+      out.write("                                            </div>\r\n");
+      out.write("\r\n");
+      out.write("                                        </div>\r\n");
+      out.write("                                    </div>\r\n");
+      out.write("                                </div>\r\n");
+      out.write("                            </div>\r\n");
       out.write("\r\n");
       out.write("                        </div>\r\n");
       out.write("\r\n");

@@ -406,6 +406,7 @@ public final class app_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("/UserPostMessage',\r\n");
       out.write("                data:{\r\n");
       out.write("                    'msg':msg,\r\n");
+      out.write("                    'identifier': \"User\"\r\n");
       out.write("\r\n");
       out.write("                },\r\n");
       out.write("                success:function(data){\r\n");

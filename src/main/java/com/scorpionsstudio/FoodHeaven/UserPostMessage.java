@@ -24,9 +24,15 @@ public class UserPostMessage extends ConnectionBlock {
             ps = con.prepareStatement("INSERT INTO save_conversation (id, sender_id, sender_name, msg, identifier) VALUES(null, ?, ?, ?, ?)");
 
             ps.setString(1, ""+rsLoc.getInt("id"));
-            ps.setString(2, rsLoc.getString("name"));
+            if(request.getParameter("identifier").equalsIgnoreCase("Admin")){
+                ps.setString(2, rsLoc.getString("restaurant_name"));
+            }
+            else if(request.getParameter("identifier").equalsIgnoreCase("User")){
+                ps.setString(2, rsLoc.getString("name"));
+            }
+
             ps.setString(3, request.getParameter("msg"));
-            ps.setString(4, "User");
+            ps.setString(4, request.getParameter("identifier"));
 
 
             ps.executeUpdate();
@@ -50,10 +56,18 @@ public class UserPostMessage extends ConnectionBlock {
 
             ps = con.prepareStatement("INSERT INTO save_conversation (id, sender_id, sender_name, msg, identifier) VALUES(null, ?, ?, ?, ?)");
 
-            ps.setString(1, ""+rsLoc.getInt("id"));
-            ps.setString(2, rsLoc.getString("name"));
+
+            if(request.getParameter("identifier").equalsIgnoreCase("Admin")){
+                ps.setString(1, request.getParameter("id"));
+                ps.setString(2, rsLoc.getString("restaurant_name"));
+            }
+            else if(request.getParameter("identifier").equalsIgnoreCase("User")){
+                ps.setString(1, ""+rsLoc.getInt("id"));
+                ps.setString(2, rsLoc.getString("name"));
+            }
+
             ps.setString(3, request.getParameter("msg"));
-            ps.setString(4, "User");
+            ps.setString(4, request.getParameter("identifier"));
 
 
             ps.executeUpdate();

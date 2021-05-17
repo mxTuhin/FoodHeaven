@@ -349,6 +349,7 @@
                 url : '<%=request.getContextPath()%>/UserPostMessage',
                 data:{
                     'msg':msg,
+                    'identifier': "User"
 
                 },
                 success:function(data){
