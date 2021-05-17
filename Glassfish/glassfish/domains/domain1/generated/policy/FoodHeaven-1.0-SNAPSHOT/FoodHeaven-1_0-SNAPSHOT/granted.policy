@@ -1,14 +1,16 @@
-/* AUTOMATICALLY GENERATED ON Mon May 17 20:30:19 BDT 2021*/
+/* AUTOMATICALLY GENERATED ON Tue May 18 04:16:59 BDT 2021*/
 /* DO NOT EDIT */
 
 grant {
-  permission javax.security.jacc.WebUserDataPermission "/";
   permission javax.security.jacc.WebResourcePermission "/";
+  permission javax.security.jacc.WebUserDataPermission "/";
 };
 
 grant      principal * * {
   permission javax.security.jacc.WebRoleRefPermission "", "**";
   permission javax.security.jacc.WebRoleRefPermission "DeleteFoodServlet", "**";
+  permission javax.security.jacc.WebRoleRefPermission "AddToTempCart", "**";
+  permission javax.security.jacc.WebRoleRefPermission "FetchRestaurant", "**";
   permission javax.security.jacc.WebRoleRefPermission "AdminSignUpServlet", "**";
   permission javax.security.jacc.WebRoleRefPermission "default", "**";
   permission javax.security.jacc.WebRoleRefPermission "landingPage", "**";
@@ -16,8 +18,8 @@ grant      principal * * {
   permission javax.security.jacc.WebRoleRefPermission "jsp", "**";
   permission javax.security.jacc.WebRoleRefPermission "SignUpServlet", "**";
   permission javax.security.jacc.WebRoleRefPermission "LogoutServlet", "**";
-  permission javax.security.jacc.WebRoleRefPermission "AdminSignInServlet", "**";
   permission javax.security.jacc.WebRoleRefPermission "UserPostMessage", "**";
+  permission javax.security.jacc.WebRoleRefPermission "AdminSignInServlet", "**";
   permission javax.security.jacc.WebRoleRefPermission "UpdateFoodServlet", "**";
   permission javax.security.jacc.WebRoleRefPermission "UploadFoodInfoServlet", "**";
 };

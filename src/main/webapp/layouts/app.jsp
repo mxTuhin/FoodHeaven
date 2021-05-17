@@ -9,6 +9,7 @@
 <%@ page import="com.scorpionsstudio.FoodHeaven.*" %>
 <%@ page import="java.sql.ResultSet" %>
 <%
+
     ResultSet rsLoc= (ResultSet) session.getAttribute("user");
     ConnectionBlock cb=new ConnectionBlock();
     ResultSet chat=null;

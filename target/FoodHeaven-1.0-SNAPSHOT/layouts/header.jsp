@@ -7,6 +7,28 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.scorpionsstudio.FoodHeaven.*" %>
+<%@ page import="java.sql.ResultSet" %>
+<%
+    ResultSet rsLoc=null;
+    ConnectionBlock cb=null;
+    ResultSet cart_food=null;
+
+    try{
+        rsLoc= (ResultSet) session.getAttribute("user");
+        cb=new ConnectionBlock();
+
+
+        cb.ps = cb.con.prepareStatement("SELECT * FROM temp_cart WHERE user_id=? ORDER BY id ASC");
+        cb.ps.setString(1, ""+rsLoc.getInt("id"));
+        cb.rs = cb.ps.executeQuery();
+        cart_food= cb.rs;
+    }
+    catch (Exception e){
+        System.out.println("meow");
+    }
+
+
+%>
 <!-- TOP HEADER Start
 ================================================== -->
 
@@ -41,27 +63,69 @@
                         }else{
                     %>
                     <li>
-                        <a href="LogoutServlet">
+                        <a href="<%=request.getContextPath()%>/LogoutServlet">
                             <i class="fas fa-sign-out-alt"></i>
                             Logout
                         </a>
                     </li>
                     <li>
-                        <div class="cart dropdown">
+                        <div style="z-index: 100000 !important;" class="cart dropdown">
                             <a data-toggle="dropdown" href="#"><i class="fa fa-shopping-cart"></i>Food Bag (<span id="cardCounter">0</span> Foods)</a>
-                            <div class="dropdown-menu dropup">
+                            <div style="width: 450px" class="dropdown-menu dropup">
                                 <span class="caret"></span>
-                                <ul class="media-list">
-                                    <li class="media">
-                                        <img class="pull-left" src="<%=StaticVars.baseURL%>images/product-item.jpg" alt="">
-                                        <div class="media-body">
-                                            <h6>Italian Sauce
-                                                <span>$250</span>
-                                            </h6>
+                                <div id="cartBoxCustom" class="row">
+                                    <div style="padding-bottom: 10px" class="col-11 col-sm-11">
+                                        <div class="col-2 col-sm-2">
+                                            <img class="pull-left" src="<%=StaticVars.baseURL%>images/product-item.jpg" alt="">
                                         </div>
-                                    </li>
-                                </ul>
-                                <button class="btn btn-primary btn-sm">Checkout</button>
+                                        <div class="col-5 col-sm-5">
+                                            <div style="color: black" class="col-12 col-sm-12">
+                                                Food name
+                                            </div><br>
+                                            <div style="color: black" class="col-12 col-sm-12">
+                                                Quantity
+                                            </div>
+                                        </div>
+                                        <div style="color: black; padding-top: 25px" class="col-3 col-sm-3">
+                                            Price
+                                        </div>
+                                        <div style="color: black; padding-top: 25px" class="col-2 col-sm-2">
+                                            Subtotal
+                                        </div>
+                                    </div>
+                                    <%
+                                        while(cart_food.next()){
+                                    %>
+                                    <div style="padding-bottom: 10px" class="col-11 col-sm-11">
+                                        <div class="col-2 col-sm-2">
+                                            <img class="pull-left" src="<%=StaticVars.baseURL%>uploads/<%=cart_food.getString("image")%>" alt="">
+                                        </div>
+                                        <div class="col-5 col-sm-5">
+                                            <div style="color: black" class="col-12 col-sm-12">
+                                                <%=cart_food.getString("food_name")%>
+                                            </div><br>
+                                            <div style="color: black" class="col-12 col-sm-12">
+                                                <%=cart_food.getInt("quantity")%>
+                                            </div>
+                                        </div>
+                                        <div style="color: black; padding-top: 25px" class="col-3 col-sm-3">
+                                            <%=cart_food.getFloat("price")%>
+                                        </div>
+                                        <div style="color: black; padding-top: 25px" class="col-2 col-sm-2">
+                                            <%=cart_food.getFloat("sub_total")%>
+                                        </div>
+                                    </div>
+                                    <%
+                                        }
+                                    %>
+
+
+
+
+
+                                </div>
+
+                                <a href="#" style="color: white" class="btn btn-primary btn-sm">Checkout</a>
                             </div>
                         </div>
                     </li>
@@ -97,7 +161,7 @@
 
             </div>
             <div class="modal-body"><br>
-                <form action="LoginServlet" method="POST">
+                <form action="<%=request.getContextPath()%>/LoginServlet" method="POST">
                     <div>
                         <label>Email</label>
                         <input placeholder="E-mail address" type="text" name="email" value="" class="form-control"><br>
@@ -129,7 +193,7 @@
 
             </div>
             <div class="modal-body"><br>
-                <form action="SignUpServlet" method="GET">
+                <form action="<%=request.getContextPath()%>/SignUpServlet" method="GET">
                     <div>
                         <label>Name</label>
                         <input placeholder="Enter Your Name" type="text" name="name" value="" class="form-control"><br>
@@ -169,7 +233,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <a href="#">
+                <a href="<%=request.getContextPath() %>">
                     <img src="<%=StaticVars.baseURL%>images/logo.png" alt="logo">
                 </a>
             </div>	<!-- End of /.col-md-12 -->

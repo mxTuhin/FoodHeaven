@@ -4,6 +4,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 import com.scorpionsstudio.FoodHeaven.*;
+import java.sql.ResultSet;
 
 public final class header_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
@@ -46,6 +47,29 @@ public final class header_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("\r\n");
       out.write("\r\n");
+      out.write("\r\n");
+
+    ResultSet rsLoc=null;
+    ConnectionBlock cb=null;
+    ResultSet cart_food=null;
+
+    try{
+        rsLoc= (ResultSet) session.getAttribute("user");
+        cb=new ConnectionBlock();
+
+
+        cb.ps = cb.con.prepareStatement("SELECT * FROM temp_cart WHERE user_id=? ORDER BY id ASC");
+        cb.ps.setString(1, ""+rsLoc.getInt("id"));
+        cb.rs = cb.ps.executeQuery();
+        cart_food= cb.rs;
+    }
+    catch (Exception e){
+        System.out.println("meow");
+    }
+
+
+
+      out.write("\r\n");
       out.write("<!-- TOP HEADER Start\r\n");
       out.write("================================================== -->\r\n");
       out.write("\r\n");
@@ -84,29 +108,89 @@ public final class header_jsp extends org.apache.jasper.runtime.HttpJspBase
                     
       out.write("\r\n");
       out.write("                    <li>\r\n");
-      out.write("                        <a href=\"LogoutServlet\">\r\n");
+      out.write("                        <a href=\"");
+      out.print(request.getContextPath());
+      out.write("/LogoutServlet\">\r\n");
       out.write("                            <i class=\"fas fa-sign-out-alt\"></i>\r\n");
       out.write("                            Logout\r\n");
       out.write("                        </a>\r\n");
       out.write("                    </li>\r\n");
       out.write("                    <li>\r\n");
-      out.write("                        <div class=\"cart dropdown\">\r\n");
+      out.write("                        <div style=\"z-index: 100000 !important;\" class=\"cart dropdown\">\r\n");
       out.write("                            <a data-toggle=\"dropdown\" href=\"#\"><i class=\"fa fa-shopping-cart\"></i>Food Bag (<span id=\"cardCounter\">0</span> Foods)</a>\r\n");
-      out.write("                            <div class=\"dropdown-menu dropup\">\r\n");
+      out.write("                            <div style=\"width: 450px\" class=\"dropdown-menu dropup\">\r\n");
       out.write("                                <span class=\"caret\"></span>\r\n");
-      out.write("                                <ul class=\"media-list\">\r\n");
-      out.write("                                    <li class=\"media\">\r\n");
-      out.write("                                        <img class=\"pull-left\" src=\"");
+      out.write("                                <div id=\"cartBoxCustom\" class=\"row\">\r\n");
+      out.write("                                    <div style=\"padding-bottom: 10px\" class=\"col-11 col-sm-11\">\r\n");
+      out.write("                                        <div class=\"col-2 col-sm-2\">\r\n");
+      out.write("                                            <img class=\"pull-left\" src=\"");
       out.print(StaticVars.baseURL);
       out.write("images/product-item.jpg\" alt=\"\">\r\n");
-      out.write("                                        <div class=\"media-body\">\r\n");
-      out.write("                                            <h6>Italian Sauce\r\n");
-      out.write("                                                <span>$250</span>\r\n");
-      out.write("                                            </h6>\r\n");
       out.write("                                        </div>\r\n");
-      out.write("                                    </li>\r\n");
-      out.write("                                </ul>\r\n");
-      out.write("                                <button class=\"btn btn-primary btn-sm\">Checkout</button>\r\n");
+      out.write("                                        <div class=\"col-5 col-sm-5\">\r\n");
+      out.write("                                            <div style=\"color: black\" class=\"col-12 col-sm-12\">\r\n");
+      out.write("                                                Food name\r\n");
+      out.write("                                            </div><br>\r\n");
+      out.write("                                            <div style=\"color: black\" class=\"col-12 col-sm-12\">\r\n");
+      out.write("                                                Quantity\r\n");
+      out.write("                                            </div>\r\n");
+      out.write("                                        </div>\r\n");
+      out.write("                                        <div style=\"color: black; padding-top: 25px\" class=\"col-3 col-sm-3\">\r\n");
+      out.write("                                            Price\r\n");
+      out.write("                                        </div>\r\n");
+      out.write("                                        <div style=\"color: black; padding-top: 25px\" class=\"col-2 col-sm-2\">\r\n");
+      out.write("                                            Subtotal\r\n");
+      out.write("                                        </div>\r\n");
+      out.write("                                    </div>\r\n");
+      out.write("                                    ");
+
+                                        while(cart_food.next()){
+                                    
+      out.write("\r\n");
+      out.write("                                    <div style=\"padding-bottom: 10px\" class=\"col-11 col-sm-11\">\r\n");
+      out.write("                                        <div class=\"col-2 col-sm-2\">\r\n");
+      out.write("                                            <img class=\"pull-left\" src=\"");
+      out.print(StaticVars.baseURL);
+      out.write("uploads/");
+      out.print(cart_food.getString("image"));
+      out.write("\" alt=\"\">\r\n");
+      out.write("                                        </div>\r\n");
+      out.write("                                        <div class=\"col-5 col-sm-5\">\r\n");
+      out.write("                                            <div style=\"color: black\" class=\"col-12 col-sm-12\">\r\n");
+      out.write("                                                ");
+      out.print(cart_food.getString("food_name"));
+      out.write("\r\n");
+      out.write("                                            </div><br>\r\n");
+      out.write("                                            <div style=\"color: black\" class=\"col-12 col-sm-12\">\r\n");
+      out.write("                                                ");
+      out.print(cart_food.getInt("quantity"));
+      out.write("\r\n");
+      out.write("                                            </div>\r\n");
+      out.write("                                        </div>\r\n");
+      out.write("                                        <div style=\"color: black; padding-top: 25px\" class=\"col-3 col-sm-3\">\r\n");
+      out.write("                                            ");
+      out.print(cart_food.getFloat("price"));
+      out.write("\r\n");
+      out.write("                                        </div>\r\n");
+      out.write("                                        <div style=\"color: black; padding-top: 25px\" class=\"col-2 col-sm-2\">\r\n");
+      out.write("                                            ");
+      out.print(cart_food.getFloat("sub_total"));
+      out.write("\r\n");
+      out.write("                                        </div>\r\n");
+      out.write("                                    </div>\r\n");
+      out.write("                                    ");
+
+                                        }
+                                    
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("                                </div>\r\n");
+      out.write("\r\n");
+      out.write("                                <a href=\"#\" style=\"color: white\" class=\"btn btn-primary btn-sm\">Checkout</a>\r\n");
       out.write("                            </div>\r\n");
       out.write("                        </div>\r\n");
       out.write("                    </li>\r\n");
@@ -144,7 +228,9 @@ public final class header_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("            </div>\r\n");
       out.write("            <div class=\"modal-body\"><br>\r\n");
-      out.write("                <form action=\"LoginServlet\" method=\"POST\">\r\n");
+      out.write("                <form action=\"");
+      out.print(request.getContextPath());
+      out.write("/LoginServlet\" method=\"POST\">\r\n");
       out.write("                    <div>\r\n");
       out.write("                        <label>Email</label>\r\n");
       out.write("                        <input placeholder=\"E-mail address\" type=\"text\" name=\"email\" value=\"\" class=\"form-control\"><br>\r\n");
@@ -176,7 +262,9 @@ public final class header_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("            </div>\r\n");
       out.write("            <div class=\"modal-body\"><br>\r\n");
-      out.write("                <form action=\"SignUpServlet\" method=\"GET\">\r\n");
+      out.write("                <form action=\"");
+      out.print(request.getContextPath());
+      out.write("/SignUpServlet\" method=\"GET\">\r\n");
       out.write("                    <div>\r\n");
       out.write("                        <label>Name</label>\r\n");
       out.write("                        <input placeholder=\"Enter Your Name\" type=\"text\" name=\"name\" value=\"\" class=\"form-control\"><br>\r\n");
@@ -216,7 +304,9 @@ public final class header_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    <div class=\"container\">\r\n");
       out.write("        <div class=\"row\">\r\n");
       out.write("            <div class=\"col-md-12\">\r\n");
-      out.write("                <a href=\"#\">\r\n");
+      out.write("                <a href=\"");
+      out.print(request.getContextPath() );
+      out.write("\">\r\n");
       out.write("                    <img src=\"");
       out.print(StaticVars.baseURL);
       out.write("images/logo.png\" alt=\"logo\">\r\n");

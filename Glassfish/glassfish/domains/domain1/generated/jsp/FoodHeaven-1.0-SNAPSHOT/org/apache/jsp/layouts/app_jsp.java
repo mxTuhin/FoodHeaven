@@ -49,6 +49,7 @@ public final class app_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("\r\n");
 
+
     ResultSet rsLoc= (ResultSet) session.getAttribute("user");
     ConnectionBlock cb=new ConnectionBlock();
     ResultSet chat=null;

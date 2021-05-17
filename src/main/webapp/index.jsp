@@ -151,13 +151,13 @@
             %>
             <div class="col-md-3">
                 <div class="products">
-                    <a href="shop/?id=<%=restaurants.getInt("id")%>">
+                    <a href="shop/?id=<%=restaurants.getInt("id")%>&name=<%=restaurants.getString("restaurant_name")%>">
                         <img style="height: 280px !important;" src="<%=StaticVars.baseURL%>uploads/<%=restaurants.getString("logo")%>" alt="">
                     </a>
-                    <a href="single-product.html">
+                    <a href="shop/?id=<%=restaurants.getInt("id")%>&name=<%=restaurants.getString("restaurant_name")%>">
                         <h4><%=restaurants.getString("restaurant_name")%></h4>
                     </a>
-                    <a class="view-link shutter" href="#">
+                    <a class="view-link shutter" href="shop/?id=<%=restaurants.getInt("id")%>&name=<%=restaurants.getString("restaurant_name")%>">
                         Check Offers</a>
                 </div>	<!-- End of /.products -->
             </div>	<!-- End of /.col-md-3 -->

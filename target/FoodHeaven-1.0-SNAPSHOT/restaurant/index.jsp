@@ -22,6 +22,11 @@
 %>
 <head>
     <title>FoodHeaven</title>
+    <style>
+        #noResLog{
+            color: #1d87be;
+        }
+    </style>
 </head>
 <body onload="addNavActive()">
 
@@ -45,11 +50,25 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="products-heading">
-                    <h2>Restaurants</h2>
+                    <h2>Restaurants <small>(Allow Location access to auto sort your nearby restaurants)</small></h2>
+                    <form>
+                        <select id="citySelect" onchange="trigger_city()" class="form-control">
+                            <option value="NotSelected" selected disabled>Select A City</option>
+                            <option value="Dhaka">Dhaka</option>
+                            <option value="Narayanganj">Narayanganj</option>
+                            <option value="Narayanganj">Chittagong</option>
+                            <option value="Narayanganj">Sylhet</option>
+                            <option value="Narayanganj">Rajshahi</option>
+                            <option value="Narayanganj">Khulna</option>
+
+
+                        </select>
+                    </form>
                 </div>
             </div>
         </div>
-        <div class="row">
+        <br>
+        <div id="restaurant_list" class="row">
             <%
                 int i =1;
                 while (restaurants.next()){
@@ -58,13 +77,13 @@
             %>
             <div class="col-md-3">
                 <div class="products">
-                    <a href="shop/?id=<%=restaurants.getInt("id")%>">
+                    <a href="../shop/?id=<%=restaurants.getInt("id")%>&name=<%=restaurants.getString("restaurant_name")%>">
                         <img style="height: 280px !important;" src="<%=StaticVars.baseURL%>uploads/<%=restaurants.getString("logo")%>" alt="">
                     </a>
-                    <a href="single-product.html">
+                    <a href="../shop/?id=<%=restaurants.getInt("id")%>&name=<%=restaurants.getString("restaurant_name")%>">
                         <h4><%=restaurants.getString("restaurant_name")%></h4>
                     </a>
-                    <a class="view-link shutter" href="#">
+                    <a class="view-link shutter" href="../shop/?id=<%=restaurants.getInt("id")%>&name=<%=restaurants.getString("restaurant_name")%>">
                         Check Offers</a>
                 </div>	<!-- End of /.products -->
             </div>	<!-- End of /.col-md-3 -->
@@ -128,6 +147,80 @@
 <script>
     function addNavActive(){
         document.getElementById("restaurantNavButton").classList.add("active");
+    }
+</script>
+<script>
+    // Step 1: Get user coordinates
+    function getCoordintes() {
+        var options = {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0
+        };
+
+        function success(pos) {
+            var crd = pos.coords;
+            var lat = crd.latitude.toString();
+            var lng = crd.longitude.toString();
+            var coordinates = [lat, lng];
+            console.log(`Latitude: ${lat}, Longitude: ${lng}`);
+            getCity(coordinates);
+            return;
+
+        }
+
+        function error(err) {
+            console.warn(`ERROR(${err.code}): ${err.message}`);
+        }
+
+        navigator.geolocation.getCurrentPosition(success, error, options);
+    }
+
+    // Step 2: Get city name
+    function getCity(coordinates) {
+        var xhr = new XMLHttpRequest();
+        var lat = coordinates[0];
+        var lng = coordinates[1];
+
+        // Paste your LocationIQ token below.
+        xhr.open('GET', "https://us1.locationiq.com/v1/reverse.php?key=pk.c1769988a8486760e61cfdbd148bf12d&lat=" +
+            lat + "&lon=" + lng + "&format=json", true);
+        xhr.send();
+        xhr.onreadystatechange = processRequest;
+        xhr.addEventListener("readystatechange", processRequest, false);
+
+        function processRequest(e) {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var response = JSON.parse(xhr.responseText);
+                var city = response.address.city;
+                console.log(city);
+                fetch_city_restaurant(city);
+                return;
+            }
+        }
+    }
+
+    getCoordintes();
+
+    function trigger_city(){
+        var city=document.getElementById("citySelect").value;
+        fetch_city_restaurant(city);
+    }
+
+    function fetch_city_restaurant(city){
+        $.ajax({
+            type : 'post',
+            url : '<%=request.getContextPath()%>/FetchRestaurant',
+            data:{
+                'city':city
+
+            },
+            success:function(data){
+                console.log(data);
+                document.getElementById("restaurant_list").innerHTML=data;
+
+            }
+        });
     }
 </script>
 </body>
